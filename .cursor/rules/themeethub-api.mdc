@@ -1,0 +1,40 @@
+---
+description: Règles d'intégration TheMeetHub et récupération des données (SSR, cache, API)
+alwaysApply: true
+---
+
+# Intégration TheMeetHub — Vue Montreal
+
+Le site vitrine **Vue Montreal** consomme les données de **TheMeetHub** (plateforme de gestion de meetups).
+Stack : Nuxt 5, Nuxt UI, i18n.
+
+## 1. Fetch server-side uniquement
+
+Tout le contenu public (événements, speakers, sponsors, calendrier, etc.) doit être récupéré **côté serveur (SSR)** :
+- `useFetch` côté serveur
+- `$fetch` dans `definePageMeta`, `asyncData`, ou dans des API routes Nitro
+- Pas de fetch côté client pour le contenu principal
+
+## 2. Pas de CORS
+
+Les requêtes partent du serveur Node/Nuxt vers l’API TheMeetHub. CORS ne s’applique pas car le client ne parle jamais directement à l’API.
+
+## 3. URL de l’API TheMeetHub
+
+Utilise la variable d’environnement `NUXT_THEMEETHUB_API_URL` :
+- **Dev** : `http://localhost:3000` (TheMeetHub tourne en local sur le port 3000)
+- **Prod** : URL de déploiement TheMeetHub
+
+Endpoints : `/api/events`, `/api/calendar`, `/api/sponsors`, etc.
+
+## 4. Cache
+
+Mets en cache les données publiques pour limiter les appels à l’API (ex. `useFetch` avec `key` et options de cache, ou `getCachedData` / Nitro cache).
+
+## 5. Pas de credentials
+
+Le vitrine est public. Pas de cookies ni d’auth pour le contenu.
+
+## 6. SEO
+
+Privilégie le SSR pour le contenu principal afin d’optimiser le référencement.

@@ -1,0 +1,88 @@
+{
+  "site": {"name": "Vue Montreal"},
+  "nav": {
+    "home": "Accueil",
+    "events": "Événements",
+    "contact": "Contact",
+    "sponsors": "Partenaires"
+  },
+  "footer": {
+    "tagline": "La communauté Vue.js de Montréal. Rejoignez-nous pour des meetups, talks et networking.",
+    "quickLinks": "Liens rapides",
+    "contact": "Contact",
+    "newsletter": "Newsletter",
+    "newsletterDesc": "Restez informé des prochains événements et actualités.",
+    "newsletterPlaceholder": "Votre email",
+    "newsletterSubmit": "S'inscrire",
+    "newsletterSoon": "Newsletter à venir.",
+    "copyright": "© Vue Montreal Community"
+  },
+  "contact": {
+    "title": "Nous contacter",
+    "subtitle": "Une question, une idée ou envie de participer ? N'hésitez pas.",
+    "questions": "Questions générales",
+    "questionsDesc": "Pour toute question sur les événements, l'inscription ou la communauté.",
+    "sponsoring": "Devenir partenaire",
+    "sponsoringDesc": "Soutenez la communauté Vue Montreal en devenant sponsor. Plusieurs niveaux disponibles (Platinum, Gold, Silver, Bronze).",
+    "sponsoringSubject": "Demande de sponsoring - Vue Montreal",
+    "sponsoringCta": "Demander une brochure",
+    "proposeSpeaker": "Proposer un talk",
+    "speakerDesc": "Vous avez une idée de présentation ? Proposez-nous votre sujet.",
+    "speakerSubject": "Proposition de talk - Vue Montreal",
+    "speakerCta": "Proposer un sujet",
+    "proposeHost": "Proposer un lieu",
+    "hostDesc": "Votre entreprise peut accueillir un meetup ? Contactez-nous pour discuter.",
+    "hostSubject": "Proposition de lieu hôte - Vue Montreal",
+    "hostCta": "Proposer un lieu"
+  },
+  "home": {
+    "title": "Bienvenue chez Vue Montreal",
+    "subtitle": "La communauté Vue.js de Montréal",
+    "heroDesc": "Meetups, talks et networking autour de Vue.js à Montréal.",
+    "eventsSubtitle": "Rejoignez-nous pour nos prochains meetups",
+    "communityTitle": "Une communauté vivante",
+    "communityDesc": "Développeurs, designers et passionnés de Vue.js se retrouvent régulièrement pour partager, apprendre et réseauter. Des talks techniques, des débats et des moments d'échange dans une ambiance conviviale.",
+    "communityCta": "Voir les prochains événements",
+    "upcomingEvents": "Prochains événements",
+    "seeAllEvents": "Voir tous les événements",
+    "sponsors": "Nos partenaires",
+    "sponsorsDesc": "Merci à nos partenaires qui soutiennent la communauté.",
+    "becomeSponsor": "Devenir partenaire",
+    "noSponsors": "Devenir le premier partenaire."
+  },
+  "events": {
+    "title": "Événements",
+    "upcoming": "À venir",
+    "past": "Passés",
+    "noEvents": "Aucun événement pour le moment.",
+    "noUpcoming": "Aucun événement à venir.",
+    "noPast": "Aucun événement passé.",
+    "noDescription": "Aucune description disponible.",
+    "notFound": "Événement non trouvé"
+  },
+  "event": {
+    "about": "À propos",
+    "speakers": "Intervenants",
+    "sponsors": "Partenaires",
+    "details": "Détails",
+    "date": "Date",
+    "time": "Heure",
+    "location": "Lieu",
+    "bannerPlaceholder": "Image de l'événement",
+    "noSpeakers": "Aucun intervenant pour le moment.",
+    "noSponsors": "Aucun partenaire pour cet événement."
+  },
+  "sponsors": {
+    "title": "Nos partenaires",
+    "platinum": "Platinum",
+    "gold": "Gold",
+    "silver": "Silver",
+    "bronze": "Bronze",
+    "levels": {
+      "platinum": "Visibilité maximale, logo en tête de page, mention dans chaque communication",
+      "gold": "Logo prominent, présence sur les supports événements",
+      "silver": "Logo sur le site et les communications",
+      "bronze": "Logo sur la page partenaires"
+    }
+  }
+}

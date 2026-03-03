@@ -1,0 +1,88 @@
+{
+  "site": {"name": "Vue Montreal"},
+  "nav": {
+    "home": "Home",
+    "events": "Events",
+    "contact": "Contact",
+    "sponsors": "Partners"
+  },
+  "footer": {
+    "tagline": "Montreal's Vue.js community. Join us for meetups, talks and networking.",
+    "quickLinks": "Quick links",
+    "contact": "Contact",
+    "newsletter": "Newsletter",
+    "newsletterDesc": "Stay updated on upcoming events and news.",
+    "newsletterPlaceholder": "Your email",
+    "newsletterSubmit": "Subscribe",
+    "newsletterSoon": "Newsletter coming soon.",
+    "copyright": "© Vue Montreal Community"
+  },
+  "contact": {
+    "title": "Contact us",
+    "subtitle": "Have a question, idea or want to get involved? Don't hesitate.",
+    "questions": "General questions",
+    "questionsDesc": "For any questions about events, registration or the community.",
+    "sponsoring": "Become a partner",
+    "sponsoringDesc": "Support the Vue Montreal community by becoming a sponsor. Several tiers available (Platinum, Gold, Silver, Bronze).",
+    "sponsoringSubject": "Sponsoring inquiry - Vue Montreal",
+    "sponsoringCta": "Request brochure",
+    "proposeSpeaker": "Propose a talk",
+    "speakerDesc": "Have an idea for a presentation? Submit your topic.",
+    "speakerSubject": "Talk proposal - Vue Montreal",
+    "speakerCta": "Propose a topic",
+    "proposeHost": "Propose a venue",
+    "hostDesc": "Your company can host a meetup? Contact us to discuss.",
+    "hostSubject": "Venue proposal - Vue Montreal",
+    "hostCta": "Propose a venue"
+  },
+  "home": {
+    "title": "Welcome to Vue Montreal",
+    "subtitle": "Montreal's Vue.js community",
+    "heroDesc": "Meetups, talks and networking around Vue.js in Montreal.",
+    "eventsSubtitle": "Join us for our upcoming meetups",
+    "communityTitle": "A thriving community",
+    "communityDesc": "Developers, designers and Vue.js enthusiasts regularly meet to share, learn and network. Technical talks, discussions and networking in a friendly atmosphere.",
+    "communityCta": "See upcoming events",
+    "upcomingEvents": "Upcoming events",
+    "seeAllEvents": "See all events",
+    "sponsors": "Our partners",
+    "sponsorsDesc": "Thanks to our partners who support the community.",
+    "becomeSponsor": "Become a partner",
+    "noSponsors": "Become the first partner."
+  },
+  "events": {
+    "title": "Events",
+    "upcoming": "Upcoming",
+    "past": "Past",
+    "noEvents": "No events at the moment.",
+    "noUpcoming": "No upcoming events.",
+    "noPast": "No past events.",
+    "noDescription": "No description available.",
+    "notFound": "Event not found"
+  },
+  "event": {
+    "about": "About",
+    "speakers": "Speakers",
+    "sponsors": "Sponsors",
+    "details": "Details",
+    "date": "Date",
+    "time": "Time",
+    "location": "Location",
+    "bannerPlaceholder": "Event image",
+    "noSpeakers": "No speakers for this event yet.",
+    "noSponsors": "No partners for this event."
+  },
+  "sponsors": {
+    "title": "Our partners",
+    "platinum": "Platinum",
+    "gold": "Gold",
+    "silver": "Silver",
+    "bronze": "Bronze",
+    "levels": {
+      "platinum": "Maximum visibility, logo at top of page, mention in every communication",
+      "gold": "Prominent logo, presence on event materials",
+      "silver": "Logo on site and communications",
+      "bronze": "Logo on partners page"
+    }
+  }
+}

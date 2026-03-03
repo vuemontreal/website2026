@@ -1,0 +1,22 @@
+{
+  "name": "vue-montreal",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "patch-package"
+  },
+  "dependencies": {
+    "@nuxt/ui": "^4",
+    "@nuxtjs/i18n": "^9",
+    "nuxt": "^4",
+    "vue": "latest"
+  },
+  "devDependencies": {
+    "@nuxt/devtools": "latest",
+    "patch-package": "^8.0.0"
+  }
+}
