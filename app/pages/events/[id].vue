@@ -197,11 +197,38 @@
                 </div>
                 <div v-if="eventLocation">
                   <dt class="flex items-center gap-2 text-sm font-medium text-gray-500 dark:text-gray-400">
-                    <UIcon name="i-heroicons-map-pin" class="size-4" />
-                    {{ $t('event.location') }}
+                    <UIcon name="i-heroicons-building-office-2" class="size-4" />
+                    {{ $t('event.type') }}
                   </dt>
                   <dd class="mt-1">
                     {{ eventLocation }}
+                  </dd>
+                </div>
+                <div v-if="event.venue">
+                  <dt class="flex items-center gap-2 text-sm font-medium text-gray-500 dark:text-gray-400">
+                    <UIcon name="i-heroicons-map-pin" class="size-4" />
+                    {{ $t('event.venue') }}
+                  </dt>
+                  <dd class="mt-1">
+                    {{ event.venue.name }}
+                    <br>
+                    {{ event.venue.address }}
+                    <br>
+                    {{ event.venue.city }}
+                    <br>
+                    {{ event.venue.state }}
+                    <br>
+                    {{ event.venue.country }}
+
+                    <div v-if="googleMapsEmbedUrl" class="mt-4 overflow-hidden rounded-xl border border-gray-200/80 dark:border-gray-800">
+                      <iframe
+                        :src="googleMapsEmbedUrl"
+                        class="h-48 w-full"
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"
+                        :title="`Google Maps - ${event.venue.name || 'Venue'}`"
+                      />
+                    </div>
                   </dd>
                 </div>
               </dl>
@@ -264,7 +291,7 @@ const speakers = computed(() => {
   }
   // Dédupliquer et filtrer les entrées vides ou sans nom
   const seen = new Set<string>()
-  return arr.filter((s) => {
+  return arr.filter((s: any) => {
     if (!s || (!s.name && !s.title && !s.bio)) return false
     const key = (s.name || s.id || s.title || '').toString()
     if (seen.has(key)) return false
@@ -277,7 +304,56 @@ const sponsors = computed(() => {
   const e = event.value
   const list = e?.sponsors ?? e?.Sponsors ?? e?.partners ?? e?.Partners
   const arr = Array.isArray(list) ? list : []
-  return arr.filter((s) => s && (s.name || s.companyName || s.logoUrl || s.logo || s.image))
+  return arr.filter((s: any) => s && (s.name || s.companyName || s.logoUrl || s.logo || s.image))
+})
+
+const googleMapsEmbedUrl = computed<string | null>(() => {
+  const v = event.value?.venue
+  if (!v) return null
+
+  const placeId = v?.placeId ?? v?.googlePlaceId ?? v?.google_place_id
+
+  // TheMeetHub renvoie parfois lat/lng directement, parfois dans un objet/coordonnées.
+  const lat =
+    v?.latitude ??
+    v?.lat ??
+    v?.Latitude ??
+    v?.Lat ??
+    v?.geo?.latitude ??
+    v?.geo?.lat ??
+    v?.coordinates?.latitude ??
+    v?.coordinates?.lat
+
+  const lng =
+    v?.longitude ??
+    v?.lng ??
+    v?.Longitude ??
+    v?.Lng ??
+    v?.geo?.longitude ??
+    v?.geo?.lng ??
+    v?.coordinates?.longitude ??
+    v?.coordinates?.lng
+
+  // Variante: coordonnées en tableau [lat, lng]
+  const coordArr = v?.coordinates ?? v?.geo?.coordinates ?? null
+  const latFromArr = Array.isArray(coordArr) ? coordArr[0] : null
+  const lngFromArr = Array.isArray(coordArr) ? coordArr[1] : null
+
+  const latFinal = lat ?? latFromArr
+  const lngFinal = lng ?? lngFromArr
+
+  // Priorité: pointer vers l'adresse affichée (street + ville + région + pays).
+  // On évite d'inclure le nom de la venue si l'adresse existe, pour limiter les ambiguïtés.
+  const addressParts = [v?.address, v?.city, v?.state, v?.country].filter(Boolean)
+  const addressQuery = addressParts.join(', ') || [v?.name, v?.address].filter(Boolean).join(', ')
+
+  let q: string | null = null
+  if (addressQuery) q = addressQuery
+  else if (placeId) q = `place_id:${placeId}`
+  else if (latFinal != null && lngFinal != null) q = `${latFinal},${lngFinal}`
+
+  if (!q) return null
+  return `https://www.google.com/maps?q=${encodeURIComponent(q)}&z=15&output=embed`
 })
 
 // Helpers pour les nouveaux champs backend

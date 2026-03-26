@@ -1,5 +1,7 @@
 {
-  "site": {"name": "Vue Montreal"},
+  "site": {
+    "name": "Vue Montreal"
+  },
   "nav": {
     "home": "Home",
     "events": "Events",
@@ -15,7 +17,7 @@
     "newsletterPlaceholder": "Your email",
     "newsletterSubmit": "Subscribe",
     "newsletterSoon": "Newsletter coming soon.",
-    "copyright": "© Vue Montreal Community"
+    "copyright": "© { year } - Vue Montreal Community"
   },
   "contact": {
     "title": "Contact us",
@@ -61,13 +63,14 @@
     "notFound": "Event not found"
   },
   "event": {
-    "about": "About",
+    "about": "Description",
     "speakers": "Speakers",
     "sponsors": "Sponsors",
     "details": "Details",
     "date": "Date",
     "time": "Time",
-    "location": "Location",
+    "type": "Type",
+    "venue": "Venue",
     "bannerPlaceholder": "Event image",
     "noSpeakers": "No speakers for this event yet.",
     "noSponsors": "No partners for this event."

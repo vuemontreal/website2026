@@ -4,7 +4,7 @@
     <header class="sticky top-0 z-50 border-b border-gray-200/60 bg-white/80 backdrop-blur-xl dark:border-gray-800/60 dark:bg-gray-950/80">
       <div class="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <NuxtLink to="/" class="flex items-center gap-2 text-xl font-bold text-primary transition hover:text-primary-600 dark:hover:text-primary-400">
-          {{ $t('site.name') }}
+          <NuxtImg src="logo.webp" :alt="$t('site.name')" class="w-20" />
         </NuxtLink>
 
         <nav class="hidden items-center gap-1 sm:flex">
@@ -195,7 +195,7 @@
 
         <div class="mt-12 flex flex-col items-center justify-between gap-4 border-t border-gray-200 pt-8 dark:border-gray-800 sm:flex-row">
           <p class="text-sm text-gray-500">
-            {{ $t('footer.copyright') }}
+            {{ $t('footer.copyright', { year: new Date().getFullYear() }) }}
           </p>
         </div>
       </div>

@@ -3,7 +3,7 @@ export default defineNuxtConfig({
   future: {
     compatibilityVersion: 5,
   },
-  modules: ['@nuxt/ui', '@nuxtjs/i18n'],
+  modules: ['@nuxt/ui', '@nuxtjs/i18n', '@nuxt/image'],
   css: ['~/assets/css/main.css'],
   devtools: { enabled: true },
   app: {
@@ -33,16 +33,15 @@ export default defineNuxtConfig({
     public: {
       themeethubApiUrl: process.env.NUXT_THEMEETHUB_API_URL || 'http://localhost:3000',
       siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://vuemontreal.ca',
-      contactEmail: process.env.NUXT_CONTACT_EMAIL || 'contact@vuemontreal.ca',
+      contactEmail: process.env.NUXT_CONTACT_EMAIL || 'contact@vuemontreal.org',
       /** Hero image (split layout). Ex: https://images.unsplash.com/photo-xxx */
       heroImageUrl: process.env.NUXT_HERO_IMAGE_URL || 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200&q=80',
       /** Community/about section image */
       communityImageUrl: process.env.NUXT_COMMUNITY_IMAGE_URL || 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80',
       social: {
-        twitter: process.env.NUXT_SOCIAL_TWITTER || 'https://twitter.com/vuemontreal',
         github: process.env.NUXT_SOCIAL_GITHUB || 'https://github.com/vuemontreal',
-        linkedin: process.env.NUXT_SOCIAL_LINKEDIN || '',
-        discord: process.env.NUXT_SOCIAL_DISCORD || '',
+        linkedin: process.env.NUXT_SOCIAL_LINKEDIN || 'https://www.linkedin.com/company/vue-montreal/',
+        discord: process.env.NUXT_SOCIAL_DISCORD || 'https://discord.gg/ARWgnpp3',
       },
       newsletterUrl: process.env.NUXT_NEWSLETTER_URL || '',
       /** Champ email pour newsletter (Mailchimp=EMAIL, Formspree/Buttondown=email) */

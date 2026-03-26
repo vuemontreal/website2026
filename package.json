@@ -10,6 +10,7 @@
     "postinstall": "patch-package"
   },
   "dependencies": {
+    "@nuxt/image": "^2.0.0",
     "@nuxt/ui": "^4",
     "@nuxtjs/i18n": "^9",
     "nuxt": "^4",

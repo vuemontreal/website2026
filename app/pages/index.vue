@@ -5,6 +5,8 @@
       <div class="grid min-h-[420px] lg:grid-cols-2 lg:min-h-[500px]">
         <!-- Texte -->
         <div class="flex flex-col justify-center px-8 py-12 sm:px-12 sm:py-16">
+        <NuxtImg src="logo.webp" :alt="$t('site.name')" class="w-60" />
+
           <p class="mb-4 text-sm font-semibold uppercase tracking-wider text-primary">
             {{ $t('home.subtitle') }}
           </p>
