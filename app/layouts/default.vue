@@ -83,6 +83,16 @@
             </h4>
             <ul class="mt-4 space-y-2">
               <li><NuxtLink to="/events" class="text-sm text-gray-600 hover:text-primary dark:text-gray-400">{{ $t('nav.events') }}</NuxtLink></li>
+              <li>
+                <a
+                  href="https://guild.host/vue-montreal"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="text-sm text-gray-600 hover:text-primary dark:text-gray-400"
+                >
+                  {{ $t('footer.guildCommunity') }}
+                </a>
+              </li>
               <li><NuxtLink to="/sponsors" class="text-sm text-gray-600 hover:text-primary dark:text-gray-400">{{ $t('nav.sponsors') }}</NuxtLink></li>
               <li><NuxtLink to="/contact" class="text-sm text-gray-600 hover:text-primary dark:text-gray-400">{{ $t('nav.contact') }}</NuxtLink></li>
             </ul>

@@ -16,20 +16,43 @@
           <p class="mt-6 text-lg text-gray-600 dark:text-gray-300">
             {{ $t('home.heroDesc') }}
           </p>
-          <div class="mt-10 flex flex-wrap gap-4">
-            <NuxtLink
-              to="/events"
-              class="inline-flex items-center gap-2 rounded-xl bg-primary px-6 py-3.5 font-semibold text-white shadow-lg transition hover:opacity-90"
+          <div class="mt-10 w-full">
+            <div class="flex w-full gap-4">
+              <NuxtLink
+                to="/events"
+                class="inline-flex flex-2 items-center justify-center gap-2 whitespace-nowrap rounded-xl bg-primary px-6 py-3.5 font-semibold text-white shadow-lg transition hover:opacity-90"
+              >
+                {{ $t('home.upcomingEvents') }}
+                <UIcon name="i-heroicons-arrow-right" class="size-5" />
+              </NuxtLink>
+              <NuxtLink
+                to="/contact"
+                class="inline-flex flex-1 items-center justify-center whitespace-nowrap rounded-xl border-2 border-gray-200 px-6 py-3.5 font-semibold text-gray-700 transition hover:border-primary hover:text-primary dark:border-gray-700 dark:text-gray-200 dark:hover:border-primary dark:hover:text-primary"
+              >
+                {{ $t('nav.contact') }}
+              </NuxtLink>
+            </div>
+            <a
+              href="https://guild.host/vue-montreal"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="mt-4 inline-flex w-full items-center justify-center gap-2 whitespace-nowrap rounded-xl border-2 border-gray-200 px-6 py-3.5 font-semibold text-gray-700 transition hover:border-primary hover:text-primary dark:border-gray-700 dark:text-gray-200 dark:hover:border-primary dark:hover:text-primary"
             >
-              {{ $t('home.upcomingEvents') }}
-              <UIcon name="i-heroicons-arrow-right" class="size-5" />
-            </NuxtLink>
-            <NuxtLink
-              to="/contact"
-              class="inline-flex items-center gap-2 rounded-xl border-2 border-gray-200 px-6 py-3.5 font-semibold text-gray-700 transition hover:border-primary hover:text-primary dark:border-gray-700 dark:text-gray-200 dark:hover:border-primary dark:hover:text-primary"
-            >
-              {{ $t('nav.contact') }}
-            </NuxtLink>
+              {{ $t('home.joinGuild') }}
+            </a>
+            <div class="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-gray-500 dark:text-gray-400">
+              <span class="inline-flex items-baseline gap-1">
+                <span class="font-semibold text-primary">980+</span>
+                <span>membres</span>
+              </span>
+              <span class="text-gray-300 dark:text-gray-700">•</span>
+              <span class="inline-flex items-baseline gap-1">
+                <span class="font-semibold text-primary">{{ meetupsCount }}</span>
+                <span>{{ $t('home.meetupsLabel', { count: meetupsCount }) }}</span>
+              </span>
+              <span class="text-gray-300 dark:text-gray-700">•</span>
+              <span>Montréal</span>
+            </div>
           </div>
         </div>
         <!-- Image -->
@@ -126,12 +149,28 @@
       </div>
       <div v-else class="mt-10 rounded-2xl border-2 border-dashed border-gray-300 bg-gray-50/50 py-16 text-center dark:border-gray-700 dark:bg-gray-900/30">
         <UIcon name="i-heroicons-calendar-days" class="mx-auto size-14 text-gray-400" />
-        <p class="mt-4 text-gray-500 dark:text-gray-400">
-          {{ $t('events.noEvents') }}
+        <h3 class="mt-4 text-xl font-semibold text-gray-800 dark:text-gray-100">
+          {{ $t('events.emptyStateTitle') }}
+        </h3>
+        <p class="mt-2 text-gray-500 dark:text-gray-400">
+          {{ $t('events.emptyStateSubtitle') }}
         </p>
-        <NuxtLink to="/contact#speaker" class="mt-4 inline-block font-medium text-primary hover:underline">
-          {{ $t('contact.proposeSpeaker') }} →
-        </NuxtLink>
+        <div class="mt-6 flex flex-col items-center gap-4">
+          <a
+            href="https://guild.host/vue-montreal"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center rounded-xl bg-green-600 px-5 py-3 font-semibold text-white shadow-sm transition hover:bg-green-700"
+          >
+            {{ $t('events.joinGuildCta') }}
+          </a>
+          <NuxtLink
+            to="/contact#speaker"
+            class="inline-flex items-center rounded-xl border-2 border-gray-200 bg-white/0 px-5 py-3 font-semibold text-gray-700 transition hover:border-green-600 hover:text-green-600 dark:border-gray-700 dark:text-gray-200 dark:hover:border-green-500 dark:hover:text-green-500"
+          >
+            {{ $t('contact.proposeSpeaker') }} →
+          </NuxtLink>
+        </div>
       </div>
     </section>
 
@@ -235,6 +274,8 @@ const { data: rawEvents, pending } = await useFetch<any[]>('/api/events', {
   default: () => [],
 })
 
+const meetupsCount = computed(() => (rawEvents.value ?? []).length)
+
 const events = computed(() => {
   const list = rawEvents.value ?? []
   const today = new Date()
@@ -254,8 +295,8 @@ const { data: sponsors, pending: sponsorsPending } = await useFetch<any[]>('/api
 })
 
 const { getEventBannerUrl } = useEventImage()
-function eventImageUrl(event: any): string | null {
-  return getEventBannerUrl(event)
+function eventImageUrl(event: any): string | undefined {
+  return getEventBannerUrl(event) ?? undefined
 }
 
 function formatDate(dateStr: string) {

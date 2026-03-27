@@ -11,12 +11,13 @@
   "footer": {
     "tagline": "La communauté Vue.js de Montréal. Rejoignez-nous pour des meetups, talks et networking.",
     "quickLinks": "Liens rapides",
+    "guildCommunity": "Communauté Guild",
     "contact": "Contact",
     "newsletter": "Newsletter",
     "newsletterDesc": "Restez informé des prochains événements et actualités.",
     "newsletterPlaceholder": "Votre email",
     "newsletterSubmit": "S'inscrire",
-    "newsletterSoon": "Newsletter à venir.",
+    "newsletterSoon": "Sois parmi les premiers informés.",
     "copyright": "© { year } - La communauté Vue Montreal"
   },
   "contact": {
@@ -40,12 +41,14 @@
   "home": {
     "title": "Bienvenue chez Vue Montreal",
     "subtitle": "La communauté Vue.js de Montréal",
-    "heroDesc": "Meetups, talks et networking autour de Vue.js à Montréal.",
+    "heroDesc": "La communauté Vue.js qui construit l'écosystème nord-américain.",
     "eventsSubtitle": "Rejoignez-nous pour nos prochains meetups",
     "communityTitle": "Une communauté vivante",
     "communityDesc": "Développeurs, designers et passionnés de Vue.js se retrouvent régulièrement pour partager, apprendre et réseauter. Des talks techniques, des débats et des moments d'échange dans une ambiance conviviale.",
     "communityCta": "Voir les prochains événements",
     "upcomingEvents": "Prochains événements",
+    "joinGuild": "Rejoindre sur Guild →",
+    "meetupsLabel": "meetup réussi | meetups réussis",
     "seeAllEvents": "Voir tous les événements",
     "sponsors": "Nos partenaires",
     "sponsorsDesc": "Merci à nos partenaires qui soutiennent la communauté.",
@@ -57,6 +60,9 @@
     "upcoming": "À venir",
     "past": "Passés",
     "noEvents": "Aucun événement pour le moment.",
+    "emptyStateTitle": "Le prochain meetup arrive bientôt",
+    "emptyStateSubtitle": "Inscris-toi sur Guild pour être notifié dès l'annonce.",
+    "joinGuildCta": "S'inscrire sur Guild →",
     "noUpcoming": "Aucun événement à venir.",
     "noPast": "Aucun événement passé.",
     "noDescription": "Aucune description disponible.",
@@ -81,6 +87,12 @@
     "gold": "Gold",
     "silver": "Silver",
     "bronze": "Bronze",
+    "tierAudience": {
+      "platinum": "Accès à +1 000 développeurs Vue/Nuxt",
+      "gold": "Accès à +1 000 développeurs Vue/Nuxt",
+      "silver": "Logo sur le site et les communications communautaires",
+      "bronze": "Logo sur la page partenaires"
+    },
     "levels": {
       "platinum": "Visibilité maximale, logo en tête de page, mention dans chaque communication",
       "gold": "Logo prominent, présence sur les supports événements",

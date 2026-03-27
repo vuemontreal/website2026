@@ -11,6 +11,7 @@
   "footer": {
     "tagline": "Montreal's Vue.js community. Join us for meetups, talks and networking.",
     "quickLinks": "Quick links",
+    "guildCommunity": "Guild community",
     "contact": "Contact",
     "newsletter": "Newsletter",
     "newsletterDesc": "Stay updated on upcoming events and news.",
@@ -46,6 +47,8 @@
     "communityDesc": "Developers, designers and Vue.js enthusiasts regularly meet to share, learn and network. Technical talks, discussions and networking in a friendly atmosphere.",
     "communityCta": "See upcoming events",
     "upcomingEvents": "Upcoming events",
+    "joinGuild": "Join on Guild →",
+    "meetupsLabel": "successful meetup | successful meetups",
     "seeAllEvents": "See all events",
     "sponsors": "Our partners",
     "sponsorsDesc": "Thanks to our partners who support the community.",
@@ -57,6 +60,9 @@
     "upcoming": "Upcoming",
     "past": "Past",
     "noEvents": "No events at the moment.",
+    "emptyStateTitle": "The next meetup is coming soon",
+    "emptyStateSubtitle": "Sign up on Guild to be notified as soon as it is announced.",
+    "joinGuildCta": "Sign up on Guild →",
     "noUpcoming": "No upcoming events.",
     "noPast": "No past events.",
     "noDescription": "No description available.",
@@ -81,6 +87,12 @@
     "gold": "Gold",
     "silver": "Silver",
     "bronze": "Bronze",
+    "tierAudience": {
+      "platinum": "Reach 1,000+ Vue/Nuxt developers",
+      "gold": "Reach 1,000+ Vue/Nuxt developers",
+      "silver": "Logo on the site and community communications",
+      "bronze": "Logo on the partners page"
+    },
     "levels": {
       "platinum": "Maximum visibility, logo at top of page, mention in every communication",
       "gold": "Prominent logo, presence on event materials",

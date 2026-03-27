@@ -52,12 +52,28 @@
         </div>
         <div v-else class="rounded-2xl border-2 border-dashed border-gray-300 bg-gray-50 py-12 text-center dark:border-gray-700 dark:bg-gray-900/30">
           <UIcon name="i-heroicons-calendar-days" class="mx-auto size-12 text-gray-400" />
-          <p class="mt-4 text-gray-500 dark:text-gray-400">
-            {{ $t('events.noUpcoming') }}
+          <h3 class="mt-4 text-xl font-semibold text-gray-800 dark:text-gray-100">
+            {{ $t('events.emptyStateTitle') }}
+          </h3>
+          <p class="mt-2 text-gray-500 dark:text-gray-400">
+            {{ $t('events.emptyStateSubtitle') }}
           </p>
-          <NuxtLink to="/contact#speaker" class="mt-4 inline-block font-semibold text-primary hover:underline">
-            {{ $t('contact.proposeSpeaker') }} →
-          </NuxtLink>
+          <div class="mt-6 flex flex-col items-center gap-4">
+            <a
+              href="https://guild.host/vue-montreal"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center rounded-xl bg-green-600 px-5 py-3 font-semibold text-white shadow-sm transition hover:bg-green-700"
+            >
+              {{ $t('events.joinGuildCta') }}
+            </a>
+            <NuxtLink
+              to="/contact#speaker"
+              class="inline-flex items-center rounded-xl border-2 border-gray-200 bg-white/0 px-5 py-3 font-semibold text-gray-700 transition hover:border-green-600 hover:text-green-600 dark:border-gray-700 dark:text-gray-200 dark:hover:border-green-500 dark:hover:text-green-500"
+            >
+              {{ $t('contact.proposeSpeaker') }} →
+            </NuxtLink>
+          </div>
         </div>
       </section>
 
@@ -148,8 +164,8 @@ const pastEvents = computed(() => {
 })
 
 const { getEventBannerUrl } = useEventImage()
-function eventImageUrl(event: any): string | null {
-  return getEventBannerUrl(event)
+function eventImageUrl(event: any): string | undefined {
+  return getEventBannerUrl(event) ?? undefined
 }
 
 function formatDate(dateStr: string) {

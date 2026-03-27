@@ -73,18 +73,22 @@
       <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <div class="rounded-xl border border-gray-200/80 p-5 dark:border-gray-700">
           <span class="font-bold text-amber-600 dark:text-amber-500">{{ $t('sponsors.platinum') }}</span>
+          <p class="mt-1 text-xs font-medium text-green-700 dark:text-green-400">{{ $t('sponsors.tierAudience.platinum') }}</p>
           <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">{{ $t('sponsors.levels.platinum') }}</p>
         </div>
         <div class="rounded-xl border border-gray-200/80 p-5 dark:border-gray-700">
           <span class="font-bold text-yellow-600 dark:text-yellow-500">{{ $t('sponsors.gold') }}</span>
+          <p class="mt-1 text-xs font-medium text-green-700 dark:text-green-400">{{ $t('sponsors.tierAudience.gold') }}</p>
           <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">{{ $t('sponsors.levels.gold') }}</p>
         </div>
         <div class="rounded-xl border border-gray-200/80 p-5 dark:border-gray-700">
           <span class="font-bold text-gray-500">{{ $t('sponsors.silver') }}</span>
+          <p class="mt-1 text-xs font-medium text-green-700 dark:text-green-400">{{ $t('sponsors.tierAudience.silver') }}</p>
           <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">{{ $t('sponsors.levels.silver') }}</p>
         </div>
         <div class="rounded-xl border border-gray-200/80 p-5 dark:border-gray-700">
           <span class="font-bold text-amber-700 dark:text-amber-800">{{ $t('sponsors.bronze') }}</span>
+          <p class="mt-1 text-xs font-medium text-green-700 dark:text-green-400">{{ $t('sponsors.tierAudience.bronze') }}</p>
           <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">{{ $t('sponsors.levels.bronze') }}</p>
         </div>
       </div>
