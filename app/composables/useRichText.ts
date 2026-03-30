@@ -1,4 +1,4 @@
-import DOMPurify from 'isomorphic-dompurify'
+import sanitizeHtml from 'sanitize-html'
 import { marked } from 'marked'
 
 marked.setOptions({ gfm: true, breaks: true })
@@ -29,9 +29,17 @@ export function useRichText() {
       html = marked.parse(raw, { async: false }) as string
     }
 
-    return DOMPurify.sanitize(html, {
-      ALLOWED_TAGS,
-      ALLOWED_ATTR,
+    return sanitizeHtml(html, {
+      allowedTags: ALLOWED_TAGS,
+      allowedAttributes: {
+        '*': ALLOWED_ATTR,
+      },
+      // Conserve uniquement des protocoles URL explicites.
+      allowedSchemes: ['http', 'https', 'mailto'],
+      // Ajoute rel de securite sur les liens _blank.
+      transformTags: {
+        a: sanitizeHtml.simpleTransform('a', { rel: 'noopener noreferrer' }, true),
+      },
     })
   }
 
