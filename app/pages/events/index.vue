@@ -1,10 +1,10 @@
 <template>
-  <div class="mx-auto max-w-6xl space-y-16 px-4 py-10 sm:px-6 lg:px-8">
+  <div class="mx-auto max-w-6xl space-y-12 px-4 py-8 sm:space-y-16 sm:px-6 sm:py-10 lg:px-8">
     <section>
-      <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">
+      <h1 class="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
         {{ $t('events.title') }}
       </h1>
-      <p class="mt-4 text-lg text-gray-600 dark:text-gray-400">
+      <p class="mt-4 text-base text-gray-600 dark:text-gray-400 sm:text-lg">
         {{ $t('home.heroDesc') }}
       </p>
     </section>
@@ -38,7 +38,7 @@
               </div>
             </div>
             <div class="p-6">
-              <h3 class="text-lg font-bold text-gray-900 transition group-hover:text-primary dark:text-gray-100">
+              <h3 class="break-words text-lg font-bold text-gray-900 transition group-hover:text-primary dark:text-gray-100">
                 {{ event.title }}
               </h3>
               <p v-if="event.date" class="mt-2 text-sm font-medium text-primary">
@@ -101,7 +101,7 @@
               </div>
             </div>
             <div class="p-6">
-              <h3 class="text-lg font-bold text-gray-900 transition group-hover:text-primary dark:text-gray-100">
+              <h3 class="break-words text-lg font-bold text-gray-900 transition group-hover:text-primary dark:text-gray-100">
                 {{ event.title }}
               </h3>
               <p v-if="event.date" class="mt-2 text-sm font-medium text-primary">
@@ -128,8 +128,9 @@ definePageMeta({ ssr: true })
 
 const { locale } = useI18n()
 
-const { data: rawEvents, pending } = await useFetch<any[]>('/api/events', {
-  key: `events-list-${locale.value}`,
+const { data: rawEvents, pending } = await useFetch<any[]>('/api/public/events', {
+  key: computed(() => `events-list-${locale.value}`),
+  query: computed(() => ({ locale: locale.value })),
   getCachedData: (key) => useNuxtData(key).data.value,
   default: () => [],
 })

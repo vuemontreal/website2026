@@ -19,13 +19,15 @@ export async function fetchThemeethub<T>(
   },
 ): Promise<T> {
   const url = getThemeethubUrl(path)
+  const { fallback, query, cache } = options ?? {}
   try {
     return await $fetch<T>(url, {
-      ...options,
+      query,
+      cache,
       credentials: 'omit',
     })
   } catch (e) {
-    if (options?.fallback !== undefined) return options.fallback
+    if (fallback !== undefined) return fallback
     throw e
   }
 }

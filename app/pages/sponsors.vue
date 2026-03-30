@@ -1,15 +1,15 @@
 <template>
-  <div class="mx-auto max-w-4xl space-y-16 px-4 py-10 sm:px-6 lg:px-8">
+  <div class="mx-auto max-w-4xl space-y-12 px-4 py-8 sm:space-y-16 sm:px-6 sm:py-10 lg:px-8">
     <section class="text-center">
-      <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">
+      <h1 class="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
         {{ $t('sponsors.title') }}
       </h1>
-      <p class="mt-4 text-lg text-gray-600 dark:text-gray-400">
+      <p class="mt-4 text-base text-gray-600 dark:text-gray-400 sm:text-lg">
         {{ $t('home.sponsorsDesc') }}
       </p>
       <NuxtLink
         to="/contact#sponsoring"
-        class="mt-8 inline-flex items-center gap-2 rounded-xl bg-primary px-8 py-4 font-semibold text-white shadow-lg transition hover:scale-105 hover:shadow-xl"
+        class="mt-8 inline-flex w-full max-w-sm items-center justify-center gap-2 rounded-xl bg-primary px-6 py-3.5 text-sm font-semibold text-white shadow-lg transition hover:shadow-xl sm:w-auto sm:max-w-none sm:px-8 sm:py-4 sm:text-base sm:hover:scale-105"
       >
         {{ $t('home.becomeSponsor') }}
         <UIcon name="i-heroicons-arrow-right" class="size-5" />
@@ -24,12 +24,12 @@
       <div
         v-for="(list, tier) in groupedSponsors"
         :key="tier"
-        class="rounded-2xl border border-gray-200/80 bg-white p-8 shadow-sm dark:border-gray-800 dark:bg-gray-900/50"
+        class="rounded-2xl border border-gray-200/80 bg-white p-5 shadow-sm dark:border-gray-800 dark:bg-gray-900/50 sm:p-8"
       >
-        <h2 class="mb-6 text-lg font-bold uppercase tracking-wider text-primary">
+        <h2 class="mb-4 text-base font-bold uppercase tracking-wider text-primary sm:mb-6 sm:text-lg">
           {{ $t(`sponsors.${tier}`) }}
         </h2>
-        <div class="flex flex-wrap items-center gap-10">
+        <div class="flex flex-wrap items-center justify-center gap-6 sm:justify-start sm:gap-8 md:gap-10">
           <a
             v-for="sponsor in list"
             :key="sponsor.id ?? sponsor.name ?? sponsor.companyName"
@@ -50,7 +50,7 @@
       </div>
     </section>
 
-    <section v-else class="rounded-2xl border-2 border-dashed border-gray-300 bg-gray-50 p-16 text-center dark:border-gray-700 dark:bg-gray-900/30">
+    <section v-else class="rounded-2xl border-2 border-dashed border-gray-300 bg-gray-50 px-4 py-12 text-center dark:border-gray-700 dark:bg-gray-900/30 sm:p-16">
       <p class="text-gray-600 dark:text-gray-400">
         {{ $t('home.noSponsors') }}
       </p>
@@ -63,7 +63,7 @@
     </section>
 
     <!-- Niveaux -->
-    <section class="rounded-2xl border border-gray-200/80 bg-white p-8 shadow-sm dark:border-gray-800 dark:bg-gray-900/50 sm:p-10">
+    <section class="rounded-2xl border border-gray-200/80 bg-white p-5 shadow-sm dark:border-gray-800 dark:bg-gray-900/50 sm:p-8 md:p-10">
       <h2 class="mb-6 text-2xl font-bold">
         {{ $t('contact.sponsoring') }}
       </h2>
@@ -105,8 +105,12 @@
 <script setup lang="ts">
 definePageMeta({ ssr: true })
 
-const { data: sponsors, pending } = await useFetch<any[]>('/api/sponsors', {
-  key: 'sponsors-page',
+const { locale } = useI18n()
+
+const { data: sponsors, pending } = await useFetch<any[]>('/api/public/sponsors', {
+  key: computed(() => `sponsors-page-${locale.value}`),
+  query: computed(() => ({ locale: locale.value })),
+  getCachedData: (key) => useNuxtData(key).data.value,
   default: () => [],
 })
 

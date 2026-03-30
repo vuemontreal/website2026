@@ -22,10 +22,10 @@ Les requêtes partent du serveur Node/Nuxt vers l’API TheMeetHub. CORS ne s’
 ## 3. URL de l’API TheMeetHub
 
 Utilise la variable d’environnement `NUXT_THEMEETHUB_API_URL` :
-- **Dev** : `http://localhost:3000` (TheMeetHub tourne en local sur le port 3000)
+- **Dev** : URL du hub (ex. `http://localhost:3001`), pas celle de la vitrine Nuxt
 - **Prod** : URL de déploiement TheMeetHub
 
-Endpoints : `/api/events`, `/api/calendar`, `/api/sponsors`, etc.
+Endpoints vitrine (même chemins que le hub côté public) : `/api/public/events`, `/api/public/speakers`, `/api/public/sponsors`, `/api/public/calendar` (liste ou détail selon le fichier Nitro). Le hub protège `/api/*` (Better Auth) : la vitrine n’appelle que `/api/public/*` + `/api/auth/*` si un jour nécessaire, jamais `/api/events`, `/api/speakers`, etc. sans session.
 
 ## 4. Cache
 

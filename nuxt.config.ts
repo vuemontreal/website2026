@@ -31,7 +31,7 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      themeethubApiUrl: process.env.NUXT_THEMEETHUB_API_URL || 'http://localhost:3000',
+      themeethubApiUrl: process.env.NUXT_THEMEETHUB_API_URL || 'http://localhost:3001',
       siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://vuemontreal.ca',
       contactEmail: process.env.NUXT_CONTACT_EMAIL || 'contact@vuemontreal.org',
       /** Hero image (split layout). Ex: https://images.unsplash.com/photo-xxx */

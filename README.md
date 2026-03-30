@@ -9,9 +9,9 @@ Site vitrine de la communauté Vue.js de Montreal. Consomme les données de **Th
 ## Configuration
 
 1. Copier `.env.example` vers `.env`
-2. Définir `NUXT_THEMEETHUB_API_URL` :
-   - **Dev** : `http://localhost:3000` (TheMeetHub en local)
-   - **Prod** : URL de déploiement TheMeetHub
+2. Définir `NUXT_THEMEETHUB_API_URL` (URL de base du hub TheMeetHub, sans path) :
+   - **Dev** : ex. `http://localhost:3001` si l’API tourne sur ce port (la vitrine Nuxt est souvent sur un autre port)
+   - **Prod** : URL publique de l’API TheMeetHub
 
 ## Développement
 
@@ -38,6 +38,6 @@ Le site tourne sur http://localhost:3001 (ou le port suivant si occupé).
 ## Architecture
 
 - **SSR** : Tout le contenu public est récupéré côté serveur (SEO)
-- **Proxy API** : Les routes `/api/events`, `/api/calendar`, `/api/sponsors` proxy vers TheMeetHub
+- **Proxy API** : Les routes `/api/public/*` (événements, intervenants, sponsors, calendrier) proxy vers les endpoints publics du hub — pas de session Better Auth
 - **Pas de CORS** : Les requêtes partent du serveur Nuxt vers l'API
 - **Cache** : Données publiques mises en cache pour limiter les appels

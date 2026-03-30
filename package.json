@@ -13,6 +13,9 @@
     "@nuxt/image": "^2.0.0",
     "@nuxt/ui": "^4",
     "@nuxtjs/i18n": "^9",
+    "@tailwindcss/typography": "^0.5.19",
+    "isomorphic-dompurify": "^3.7.1",
+    "marked": "^17.0.5",
     "nuxt": "^4",
     "vue": "latest"
   },

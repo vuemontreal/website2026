@@ -1,13 +1,13 @@
 <template>
-  <div class="flex min-h-screen flex-col bg-gray-50 font-sans text-gray-900 dark:bg-gray-950 dark:text-gray-100">
+  <div class="flex min-h-screen flex-col overflow-x-clip bg-gray-50 font-sans text-gray-900 dark:bg-gray-950 dark:text-gray-100">
     <!-- Header -->
     <header class="sticky top-0 z-50 border-b border-gray-200/60 bg-white/80 backdrop-blur-xl dark:border-gray-800/60 dark:bg-gray-950/80">
-      <div class="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        <NuxtLink to="/" class="flex items-center gap-2 text-xl font-bold text-primary transition hover:text-primary-600 dark:hover:text-primary-400">
-          <NuxtImg src="logo.webp" :alt="$t('site.name')" class="w-20" />
+      <div class="mx-auto flex h-16 max-w-7xl min-w-0 items-center justify-between gap-2 px-3 sm:gap-3 sm:px-6 lg:px-8">
+        <NuxtLink to="/" class="flex min-w-0 shrink-0 items-center gap-2 text-xl font-bold text-primary transition hover:text-primary-600 dark:hover:text-primary-400">
+          <NuxtImg src="logo.webp" :alt="$t('site.name')" class="h-9 w-auto max-w-20 object-contain sm:h-10" />
         </NuxtLink>
 
-        <nav class="hidden items-center gap-1 sm:flex">
+        <nav class="hidden min-w-0 items-center gap-1 sm:flex">
           <NuxtLink
             v-for="item in navItems"
             :key="item.to"
@@ -18,9 +18,9 @@
           </NuxtLink>
         </nav>
 
-        <div class="flex items-center gap-2">
+        <div class="flex min-w-0 shrink-0 items-center gap-1 sm:gap-2">
           <ClientOnly>
-            <UColorModeSwitch class="sm:mr-1" />
+            <UColorModeSwitch class="max-sm:scale-90 sm:mr-1" />
           </ClientOnly>
           <UButton
             variant="ghost"
@@ -31,8 +31,8 @@
           />
           <ClientOnly>
             <UDropdownMenu :items="localeItems">
-              <UButton variant="ghost" color="neutral" size="sm" trailing-icon="i-heroicons-chevron-down">
-                {{ currentLocale }}
+              <UButton variant="ghost" color="neutral" size="sm" trailing-icon="i-heroicons-chevron-down" class="max-w-36 truncate sm:max-w-none">
+                <span class="truncate">{{ currentLocale }}</span>
               </UButton>
             </UDropdownMenu>
           </ClientOnly>
@@ -64,10 +64,10 @@
 
     <!-- Footer -->
     <footer class="border-t border-gray-200/80 bg-white dark:border-gray-800/80 dark:bg-gray-900/50">
-      <div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-        <div class="grid gap-8 lg:grid-cols-4">
+      <div class="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-12 lg:px-8">
+        <div class="grid gap-10 lg:grid-cols-4 lg:gap-8">
           <!-- Brand -->
-          <div class="lg:col-span-1">
+          <div>
             <NuxtLink to="/" class="text-lg font-bold text-primary">
               {{ $t('site.name') }}
             </NuxtLink>

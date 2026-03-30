@@ -75,11 +75,20 @@
     "details": "Détails",
     "date": "Date",
     "time": "Heure",
-    "type": "Type",
+    "type": "Format",
+    "format": {
+      "in_person": "En personne",
+      "online": "En ligne",
+      "hybrid": "Hybride"
+    },
+    "locationShort": "Localisation",
     "venue": "Lieu",
     "bannerPlaceholder": "Image de l'événement",
     "noSpeakers": "Aucun intervenant pour le moment.",
-    "noSponsors": "Aucun partenaire pour cet événement."
+    "noSponsors": "Aucun partenaire pour cet événement.",
+    "replays": "Replays",
+    "replaysYoutubeChannel": "Les replays sont disponibles sur notre chaîne YouTube →",
+    "replayVideoTitleFallback": "Replay"
   },
   "sponsors": {
     "title": "Nos partenaires",

@@ -1,33 +1,33 @@
 <template>
-  <div class="mx-auto max-w-6xl space-y-24 px-4 py-12 sm:px-6 lg:px-8">
+  <div class="mx-auto max-w-6xl space-y-16 px-4 py-8 sm:space-y-24 sm:px-6 sm:py-12 lg:px-8">
     <!-- Hero split : texte + image (tendance event/meetup) -->
     <section class="overflow-hidden rounded-3xl border border-gray-200/80 bg-white shadow-xl dark:border-gray-800 dark:bg-gray-900/50">
-      <div class="grid min-h-[420px] lg:grid-cols-2 lg:min-h-[500px]">
+      <div class="grid min-h-[360px] lg:grid-cols-2 lg:min-h-[500px]">
         <!-- Texte -->
-        <div class="flex flex-col justify-center px-8 py-12 sm:px-12 sm:py-16">
-        <NuxtImg src="logo.webp" :alt="$t('site.name')" class="w-60" />
+        <div class="flex flex-col justify-center px-5 py-10 sm:px-12 sm:py-16">
+        <NuxtImg src="logo.webp" :alt="$t('site.name')" class="h-auto w-44 max-w-full object-contain sm:w-60" />
 
           <p class="mb-4 text-sm font-semibold uppercase tracking-wider text-primary">
             {{ $t('home.subtitle') }}
           </p>
-          <h1 class="text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-5xl">
+          <h1 class="text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl md:text-5xl">
             {{ $t('home.title') }}
           </h1>
-          <p class="mt-6 text-lg text-gray-600 dark:text-gray-300">
+          <p class="mt-6 text-base text-gray-600 dark:text-gray-300 sm:text-lg">
             {{ $t('home.heroDesc') }}
           </p>
-          <div class="mt-10 w-full">
-            <div class="flex w-full gap-4">
+          <div class="mt-10 w-full min-w-0">
+            <div class="flex w-full min-w-0 flex-col gap-3 sm:flex-row sm:gap-4">
               <NuxtLink
                 to="/events"
-                class="inline-flex flex-2 items-center justify-center gap-2 whitespace-nowrap rounded-xl bg-primary px-6 py-3.5 font-semibold text-white shadow-lg transition hover:opacity-90"
+                class="inline-flex min-h-11 flex-2 items-center justify-center gap-2 rounded-xl bg-primary px-5 py-3.5 text-center text-sm font-semibold text-white shadow-lg transition hover:opacity-90 sm:min-h-0 sm:px-6 sm:text-base"
               >
                 {{ $t('home.upcomingEvents') }}
-                <UIcon name="i-heroicons-arrow-right" class="size-5" />
+                <UIcon name="i-heroicons-arrow-right" class="size-5 shrink-0" />
               </NuxtLink>
               <NuxtLink
                 to="/contact"
-                class="inline-flex flex-1 items-center justify-center whitespace-nowrap rounded-xl border-2 border-gray-200 px-6 py-3.5 font-semibold text-gray-700 transition hover:border-primary hover:text-primary dark:border-gray-700 dark:text-gray-200 dark:hover:border-primary dark:hover:text-primary"
+                class="inline-flex min-h-11 flex-1 items-center justify-center rounded-xl border-2 border-gray-200 px-5 py-3.5 text-center text-sm font-semibold text-gray-700 transition hover:border-primary hover:text-primary dark:border-gray-700 dark:text-gray-200 dark:hover:border-primary dark:hover:text-primary sm:min-h-0 sm:px-6 sm:text-base"
               >
                 {{ $t('nav.contact') }}
               </NuxtLink>
@@ -36,7 +36,7 @@
               href="https://guild.host/vue-montreal"
               target="_blank"
               rel="noopener noreferrer"
-              class="mt-4 inline-flex w-full items-center justify-center gap-2 whitespace-nowrap rounded-xl border-2 border-gray-200 px-6 py-3.5 font-semibold text-gray-700 transition hover:border-primary hover:text-primary dark:border-gray-700 dark:text-gray-200 dark:hover:border-primary dark:hover:text-primary"
+              class="mt-4 inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-xl border-2 border-gray-200 px-5 py-3.5 text-center text-sm font-semibold text-gray-700 transition hover:border-primary hover:text-primary dark:border-gray-700 dark:text-gray-200 dark:hover:border-primary dark:hover:text-primary sm:px-6 sm:text-base"
             >
               {{ $t('home.joinGuild') }}
             </a>
@@ -77,8 +77,8 @@
           class="absolute inset-0 size-full object-cover"
         />
       </div>
-      <div class="flex flex-col justify-center px-8 py-12 sm:px-12 sm:py-16 lg:order-2">
-        <h2 class="text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
+      <div class="flex flex-col justify-center px-5 py-10 sm:px-12 sm:py-16 lg:order-2">
+        <h2 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-3xl md:text-4xl">
           {{ $t('home.communityTitle') }}
         </h2>
         <p class="mt-6 text-lg leading-relaxed text-gray-600 dark:text-gray-300">
@@ -96,9 +96,9 @@
 
     <!-- Prochains événements -->
     <section>
-      <div class="flex flex-wrap items-end justify-between gap-4">
-        <div>
-          <h2 class="text-3xl font-bold tracking-tight sm:text-4xl">
+      <div class="flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-end sm:justify-between">
+        <div class="min-w-0">
+          <h2 class="text-2xl font-bold tracking-tight sm:text-3xl md:text-4xl">
             {{ $t('home.upcomingEvents') }}
           </h2>
           <p class="mt-2 text-gray-600 dark:text-gray-400">
@@ -107,7 +107,7 @@
         </div>
         <NuxtLink
           to="/events"
-          class="flex items-center gap-2 font-semibold text-primary transition hover:gap-3"
+          class="flex shrink-0 items-center gap-2 self-start font-semibold text-primary transition hover:gap-3 sm:self-auto"
         >
           {{ $t('home.seeAllEvents') }}
           <UIcon name="i-heroicons-arrow-right" class="size-4" />
@@ -135,7 +135,7 @@
             </div>
           </div>
           <div class="p-6">
-            <h3 class="text-lg font-bold text-gray-900 transition group-hover:text-primary dark:text-gray-100">
+            <h3 class="break-words text-lg font-bold text-gray-900 transition group-hover:text-primary dark:text-gray-100">
               {{ event.title }}
             </h3>
             <p v-if="event.date" class="mt-2 text-sm font-medium text-primary">
@@ -175,7 +175,7 @@
     </section>
 
     <!-- Newsletter -->
-    <section class="rounded-3xl border border-gray-200/80 bg-primary/5 px-8 py-12 dark:border-gray-800 dark:bg-primary/10 sm:px-12 sm:py-16">
+    <section class="rounded-3xl border border-gray-200/80 bg-primary/5 px-5 py-10 dark:border-gray-800 dark:bg-primary/10 sm:px-12 sm:py-16">
       <div class="mx-auto max-w-2xl text-center">
         <h2 class="text-2xl font-bold tracking-tight sm:text-3xl">
           {{ $t('footer.newsletter') }}
@@ -210,10 +210,10 @@
     </section>
 
     <!-- Sponsors -->
-    <section class="rounded-3xl border border-gray-200/80 bg-white p-8 shadow-sm dark:border-gray-800 dark:bg-gray-900/30 sm:p-12">
-      <div class="flex flex-wrap items-end justify-between gap-6">
-        <div>
-          <h2 class="text-3xl font-bold tracking-tight sm:text-4xl">
+    <section class="rounded-3xl border border-gray-200/80 bg-white p-5 shadow-sm dark:border-gray-800 dark:bg-gray-900/30 sm:p-8 md:p-12">
+      <div class="flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-end sm:justify-between sm:gap-6">
+        <div class="min-w-0">
+          <h2 class="text-2xl font-bold tracking-tight sm:text-3xl md:text-4xl">
             {{ $t('home.sponsors') }}
           </h2>
           <p class="mt-2 text-gray-600 dark:text-gray-400">
@@ -222,7 +222,7 @@
         </div>
         <NuxtLink
           to="/contact#sponsoring"
-          class="rounded-xl bg-primary px-6 py-3 font-semibold text-white shadow-lg transition hover:opacity-90"
+          class="inline-flex w-full items-center justify-center rounded-xl bg-primary px-6 py-3 text-center font-semibold text-white shadow-lg transition hover:opacity-90 sm:w-auto"
         >
           {{ $t('home.becomeSponsor') }}
         </NuxtLink>
@@ -230,7 +230,7 @@
       <div v-if="sponsorsPending" class="flex justify-center py-16">
         <UIcon name="i-heroicons-arrow-path" class="size-10 animate-spin text-primary" />
       </div>
-      <div v-else-if="sponsors?.length" class="mt-12 flex flex-wrap items-center justify-center gap-12">
+      <div v-else-if="sponsors?.length" class="mt-8 flex flex-wrap items-center justify-center gap-8 sm:mt-12 sm:gap-10 md:gap-12">
         <a
           v-for="sponsor in sponsors"
           :key="sponsor.id ?? sponsor.name ?? sponsor.companyName"
@@ -268,8 +268,9 @@ function onNewsletterSubmit(e: Event) {
   if (!siteConfig.newsletterUrl) e.preventDefault()
 }
 
-const { data: rawEvents, pending } = await useFetch<any[]>('/api/events', {
-  key: `events-home-${locale.value}`,
+const { data: rawEvents, pending } = await useFetch<any[]>('/api/public/events', {
+  key: computed(() => `events-home-${locale.value}`),
+  query: computed(() => ({ locale: locale.value })),
   getCachedData: (key) => useNuxtData(key).data.value,
   default: () => [],
 })
@@ -289,8 +290,10 @@ const events = computed(() => {
   })
 })
 
-const { data: sponsors, pending: sponsorsPending } = await useFetch<any[]>('/api/sponsors', {
-  key: 'sponsors-home',
+const { data: sponsors, pending: sponsorsPending } = await useFetch<any[]>('/api/public/sponsors', {
+  key: computed(() => `sponsors-home-${locale.value}`),
+  query: computed(() => ({ locale: locale.value })),
+  getCachedData: (key) => useNuxtData(key).data.value,
   default: () => [],
 })
 
