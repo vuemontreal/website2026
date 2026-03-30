@@ -1,0 +1,27 @@
+{
+  "name": "vue-montreal",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "patch-package"
+  },
+  "dependencies": {
+    "@nuxt/image": "^2.0.0",
+    "@nuxt/ui": "^4",
+    "@nuxtjs/i18n": "^9",
+    "@tailwindcss/typography": "^0.5.19",
+    "isomorphic-dompurify": "^3.7.1",
+    "marked": "^17.0.5",
+    "nuxt": "^4",
+    "vue": "latest"
+  },
+  "devDependencies": {
+    "@nuxt/devtools": "latest",
+    "@types/node": "^25.5.0",
+    "patch-package": "^8.0.0"
+  }
+}

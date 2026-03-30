@@ -1,0 +1,182 @@
+{
+  "site": {
+    "name": "Vue Montreal"
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "events": "Events",
+    "contact": "Contact",
+    "sponsors": "Partners",
+    "join": "Join us"
+  },
+  "footer": {
+    "tagline": "Montreal's Vue.js community. Join us for meetups, talks and networking.",
+    "quickLinks": "Quick links",
+    "guildCommunity": "Guild community",
+    "contact": "Contact",
+    "newsletter": "Newsletter",
+    "newsletterDesc": "Stay updated on upcoming events and news.",
+    "newsletterPlaceholder": "Your email",
+    "newsletterSubmit": "Subscribe",
+    "newsletterSoon": "Newsletter coming soon.",
+    "copyright": "© { year } - Vue Montreal Community"
+  },
+  "contact": {
+    "title": "Contact us",
+    "subtitle": "Have a question, idea or want to get involved? Don't hesitate.",
+    "questions": "General questions",
+    "questionsDesc": "For any questions about events, registration or the community.",
+    "sponsoring": "Become a partner",
+    "sponsoringDesc": "Support the Vue Montreal community by becoming a sponsor. Several tiers available (Platinum, Gold, Silver, Bronze).",
+    "sponsoringSubject": "Sponsoring inquiry - Vue Montreal",
+    "sponsoringCta": "Request brochure",
+    "proposeSpeaker": "Propose a talk",
+    "speakerDesc": "Have an idea for a presentation? Submit your topic.",
+    "speakerSubject": "Talk proposal - Vue Montreal",
+    "speakerCta": "Propose a topic",
+    "proposeHost": "Propose a venue",
+    "hostDesc": "Your company can host a meetup? Contact us to discuss.",
+    "hostSubject": "Venue proposal - Vue Montreal",
+    "hostCta": "Propose a venue"
+  },
+  "home": {
+    "title": "Welcome to Vue Montreal",
+    "subtitle": "Montreal's Vue.js community",
+    "heroDesc": "Meetups, talks and networking around Vue.js in Montreal.",
+    "eventsSubtitle": "Join us for our upcoming meetups",
+    "statsMembersLabel": "members",
+    "statsCityLabel": "city",
+    "communityTitle": "A thriving community",
+    "communityDesc": "Vue Montreal brings together developers and Vue/Nuxt learners to learn, share, and build together. Whether you're a beginner or an expert, you'll find your place here.",
+    "communityImageAlt": "Photo — Vue Montreal community",
+    "communityCardConnectTitle": "Connect with us",
+    "communityCardConnectDesc": "Meet Vue/Nuxt developers from Montreal and beyond",
+    "communityCardLearnTitle": "Learn and grow",
+    "communityCardLearnDesc": "Technical talks, in-depth discussions, and concrete real-world experience",
+    "communityCardCareerTitle": "Career opportunities",
+    "communityCardCareerDesc": "Discover companies hiring Vue/Nuxt profiles",
+    "communityCardContributeTitle": "Contribute and share",
+    "communityCardContributeDesc": "Propose a talk, co-organize a meetup, and help the community grow",
+    "communityCta": "See upcoming events",
+    "whyJoinTitle": "Why join Vue Montreal?",
+    "whyJoinCard1Title": "Community first",
+    "whyJoinCard1Desc": "An inclusive, welcoming space where knowledge flows freely and every member matters",
+    "whyJoinCard2Title": "Technical excellence",
+    "whyJoinCard2Desc": "High-quality talks, honest discussions, and modern practices around Vue, Nuxt, and the frontend ecosystem",
+    "whyJoinCard3Title": "North American connection",
+    "whyJoinCard3Desc": "The bridge between the Montreal Vue scene and the global Vue ecosystem",
+    "upcomingEvents": "Upcoming events",
+    "joinGuild": "Join on Guild →",
+    "meetupsLabel": "successful meetup | successful meetups",
+    "seeAllEvents": "See all events",
+    "sponsors": "Our partners",
+    "sponsorsDesc": "Thanks to our partners who support the community.",
+    "becomeSponsor": "Become a partner",
+    "noSponsors": "Become the first partner."
+  },
+  "about": {
+    "headerSubtitle": "The Vue.js community building the North American ecosystem.",
+    "historyTitle": "Our story",
+    "historyText": "Vue Montreal was born from the belief that a strong Vue.js community deserves to exist in North America. Relaunched in 2025 after several years of dormancy, it brings together passionate developers around regular meetups, technical talks, and a growing network with every edition. Our ambition: to become the North American equivalent of Vue Amsterdam.",
+    "whatTitle": "What we do",
+    "whatCard1Title": "Quarterly meetups",
+    "whatCard1Desc": "Technical talks, networking, and exchanges in a friendly atmosphere",
+    "whatCard2Title": "High-quality content",
+    "whatCard2Desc": "YouTube replays, resources, and recap posts after every event",
+    "whatCard3Title": "Connections that matter",
+    "whatCard3Desc": "International speakers, partnerships, and cross-community collaborations",
+    "valuesTitle": "Our values",
+    "joinTitle": "Join the community",
+    "joinDesc": "Discover, learn, and connect with the Vue.js community in Montreal.",
+    "joinLinkedIn": "Join on LinkedIn →",
+    "joinGuild": "Sign up on Guild →",
+    "joinDiscord": "Join the Discord →"
+  },
+  "events": {
+    "title": "Events",
+    "upcoming": "Upcoming",
+    "past": "Past",
+    "noEvents": "No events at the moment.",
+    "emptyStateTitle": "The next meetup is coming soon",
+    "emptyStateSubtitle": "Sign up on Guild to be notified as soon as it is announced.",
+    "joinGuildCta": "Sign up on Guild →",
+    "noUpcoming": "No upcoming events.",
+    "noPast": "No past events.",
+    "noDescription": "No description available.",
+    "notFound": "Event not found"
+  },
+  "event": {
+    "about": "Description",
+    "speakers": "Speakers",
+    "sponsors": "Sponsors",
+    "details": "Details",
+    "date": "Date",
+    "time": "Time",
+    "type": "Format",
+    "format": {
+      "in_person": "In person",
+      "online": "Online",
+      "hybrid": "Hybrid"
+    },
+    "locationShort": "Location",
+    "venue": "Venue",
+    "bannerPlaceholder": "Event image",
+    "noSpeakers": "No speakers for this event yet.",
+    "noSponsors": "No partners for this event.",
+    "officialSponsorLabel": "Official Vue Montreal partner",
+    "replays": "Replays",
+    "replaysYoutubeChannel": "Replays are available on our YouTube channel →",
+    "replayVideoTitleFallback": "Replay"
+  },
+  "sponsors": {
+    "title": "Our partners",
+    "financialTitle": "Financial partners",
+    "platinum": "Platinum",
+    "gold": "Gold",
+    "silver": "Silver",
+    "bronze": "Bronze",
+    "communityTitle": "Community partners",
+    "seeWebsite": "Visit website",
+    "seeWebsiteArrow": "Visit website →",
+    "noCommunitySponsors": "No community partners yet.",
+    "tierAudience": {
+      "platinum": "Reach 1,000+ Vue/Nuxt developers",
+      "gold": "Reach 1,000+ Vue/Nuxt developers",
+      "silver": "Logo on the site and community communications",
+      "bronze": "Logo on the partners page"
+    },
+    "levels": {
+      "platinum": "Maximum visibility, logo at top of page, mention in every communication",
+      "gold": "Prominent logo, presence on event materials",
+      "silver": "Logo on site and communications",
+      "bronze": "Logo on partners page"
+    }
+  },
+  "seo": {
+    "home": {
+      "title": "Vue Montreal | Vue.js Community in Montreal",
+      "description": "Vue Montreal runs Vue.js and Nuxt meetups in Montreal with technical talks, networking, and opportunities for the frontend community."
+    },
+    "about": {
+      "title": "About | Vue Montreal",
+      "description": "Learn about Vue Montreal's story and mission, the Vue.js community connecting developers in Montreal."
+    },
+    "events": {
+      "title": "Vue.js Events in Montreal | Vue Montreal",
+      "description": "Browse upcoming Vue.js and Nuxt meetups in Montreal, plus past events and replay content."
+    },
+    "sponsors": {
+      "title": "Partners | Vue Montreal",
+      "description": "Our financial and community partners supporting Vue Montreal and the Vue/Nuxt ecosystem in Montreal."
+    },
+    "contact": {
+      "title": "Contact | Vue Montreal",
+      "description": "Get in touch with Vue Montreal to propose a talk, become a partner, or host a meetup."
+    },
+    "event": {
+      "fallbackTitle": "Event | Vue Montreal",
+      "defaultDescription": "Find all details for a Vue Montreal event: date, speakers, venue, and practical information."
+    }
+  }
+}

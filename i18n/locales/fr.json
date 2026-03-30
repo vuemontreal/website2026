@@ -1,0 +1,182 @@
+{
+  "site": {
+    "name": "Vue Montreal"
+  },
+  "nav": {
+    "home": "Accueil",
+    "about": "À propos",
+    "events": "Événements",
+    "contact": "Contact",
+    "sponsors": "Partenaires",
+    "join": "Rejoindre"
+  },
+  "footer": {
+    "tagline": "La communauté Vue.js de Montréal. Rejoignez-nous pour des meetups, talks et networking.",
+    "quickLinks": "Liens rapides",
+    "guildCommunity": "Communauté Guild",
+    "contact": "Contact",
+    "newsletter": "Newsletter",
+    "newsletterDesc": "Restez informé des prochains événements et actualités.",
+    "newsletterPlaceholder": "Votre email",
+    "newsletterSubmit": "S'inscrire",
+    "newsletterSoon": "Sois parmi les premiers informés.",
+    "copyright": "© { year } - La communauté Vue Montreal"
+  },
+  "contact": {
+    "title": "Nous contacter",
+    "subtitle": "Une question, une idée ou envie de participer ? N'hésitez pas.",
+    "questions": "Questions générales",
+    "questionsDesc": "Pour toute question sur les événements, l'inscription ou la communauté.",
+    "sponsoring": "Devenir partenaire",
+    "sponsoringDesc": "Soutenez la communauté Vue Montreal en devenant sponsor. Plusieurs niveaux disponibles (Platinum, Gold, Silver, Bronze).",
+    "sponsoringSubject": "Demande de sponsoring - Vue Montreal",
+    "sponsoringCta": "Demander une brochure",
+    "proposeSpeaker": "Proposer un talk",
+    "speakerDesc": "Vous avez une idée de présentation ? Proposez-nous votre sujet.",
+    "speakerSubject": "Proposition de talk - Vue Montreal",
+    "speakerCta": "Proposer un sujet",
+    "proposeHost": "Proposer un lieu",
+    "hostDesc": "Votre entreprise peut accueillir un meetup ? Contactez-nous pour discuter.",
+    "hostSubject": "Proposition de lieu hôte - Vue Montreal",
+    "hostCta": "Proposer un lieu"
+  },
+  "home": {
+    "title": "Bienvenue chez Vue Montreal",
+    "subtitle": "La communauté Vue.js de Montréal",
+    "heroDesc": "La communauté Vue.js qui construit l'écosystème nord-américain.",
+    "eventsSubtitle": "Rejoignez-nous pour nos prochains meetups",
+    "statsMembersLabel": "membres",
+    "statsCityLabel": "ville",
+    "communityTitle": "Une communauté vivante",
+    "communityDesc": "Vue Montréal réunit développeurs et développeuses Vue/Nuxt pour apprendre, partager et bâtir ensemble. Que tu sois débutant ou expert, tu as ta place ici.",
+    "communityImageAlt": "Photo — communauté Vue Montréal",
+    "communityCardConnectTitle": "Connecte-toi",
+    "communityCardConnectDesc": "Rencontre des développeurs Vue/Nuxt de Montréal et d'ailleurs",
+    "communityCardLearnTitle": "Apprends et progresse",
+    "communityCardLearnDesc": "Des talks techniques, des discussions de fond et des retours d'expérience concrets",
+    "communityCardCareerTitle": "Opportunités de carrière",
+    "communityCardCareerDesc": "Découvre des entreprises qui recrutent des profils Vue/Nuxt",
+    "communityCardContributeTitle": "Contribue et partage",
+    "communityCardContributeDesc": "Propose un talk, co-organise un meetup, aide à faire grandir la communauté",
+    "communityCta": "Voir les prochains événements",
+    "whyJoinTitle": "Pourquoi rejoindre Vue Montréal ?",
+    "whyJoinCard1Title": "Communauté d'abord",
+    "whyJoinCard1Desc": "Un espace inclusif et bienveillant où la connaissance circule librement et chaque membre compte",
+    "whyJoinCard2Title": "Excellence technique",
+    "whyJoinCard2Desc": "Des talks de qualité, des débats honnêtes et des pratiques modernes autour de Vue, Nuxt et l'écosystème frontend",
+    "whyJoinCard3Title": "Connexion nord-américaine",
+    "whyJoinCard3Desc": "Le pont entre la scène Vue de Montréal et l'écosystème Vue global",
+    "upcomingEvents": "Prochains événements",
+    "joinGuild": "Rejoindre sur Guild →",
+    "meetupsLabel": "meetup réussi | meetups réussis",
+    "seeAllEvents": "Voir tous les événements",
+    "sponsors": "Nos partenaires",
+    "sponsorsDesc": "Merci à nos partenaires qui soutiennent la communauté.",
+    "becomeSponsor": "Devenir partenaire",
+    "noSponsors": "Devenir le premier partenaire."
+  },
+  "about": {
+    "headerSubtitle": "La communauté Vue.js qui construit l'écosystème nord-américain.",
+    "historyTitle": "Notre histoire",
+    "historyText": "Vue Montréal est née de la conviction qu'une communauté Vue.js forte mérite d'exister en Amérique du Nord. Relancée en 2025 après plusieurs années de dormance, elle réunit des développeurs et développeuses passionnés autour de meetups réguliers, de talks techniques et d'un réseau qui grandit à chaque édition. Notre ambition : devenir l'équivalent nord-américain de Vue Amsterdam.",
+    "whatTitle": "Ce qu'on fait",
+    "whatCard1Title": "Meetups trimestriels",
+    "whatCard1Desc": "Talks techniques, networking et échanges dans une ambiance conviviale",
+    "whatCard2Title": "Contenu de qualité",
+    "whatCard2Desc": "Replays YouTube, ressources et récapitulatifs après chaque événement",
+    "whatCard3Title": "Connexions qui comptent",
+    "whatCard3Desc": "Speakers internationaux, partenariats et collaborations cross-communautés",
+    "valuesTitle": "Nos valeurs",
+    "joinTitle": "Rejoindre la communauté",
+    "joinDesc": "Découvrez, apprenez et connectez-vous à la communauté Vue.js de Montréal.",
+    "joinLinkedIn": "Rejoindre sur LinkedIn →",
+    "joinGuild": "S'inscrire sur Guild →",
+    "joinDiscord": "Rejoindre le Discord →"
+  },
+  "events": {
+    "title": "Événements",
+    "upcoming": "À venir",
+    "past": "Passés",
+    "noEvents": "Aucun événement pour le moment.",
+    "emptyStateTitle": "Le prochain meetup arrive bientôt",
+    "emptyStateSubtitle": "Inscris-toi sur Guild pour être notifié dès l'annonce.",
+    "joinGuildCta": "S'inscrire sur Guild →",
+    "noUpcoming": "Aucun événement à venir.",
+    "noPast": "Aucun événement passé.",
+    "noDescription": "Aucune description disponible.",
+    "notFound": "Événement non trouvé"
+  },
+  "event": {
+    "about": "Description",
+    "speakers": "Intervenants",
+    "sponsors": "Partenaires",
+    "details": "Détails",
+    "date": "Date",
+    "time": "Heure",
+    "type": "Format",
+    "format": {
+      "in_person": "En personne",
+      "online": "En ligne",
+      "hybrid": "Hybride"
+    },
+    "locationShort": "Localisation",
+    "venue": "Lieu",
+    "bannerPlaceholder": "Image de l'événement",
+    "noSpeakers": "Aucun intervenant pour le moment.",
+    "noSponsors": "Aucun partenaire pour cet événement.",
+    "officialSponsorLabel": "Partenaire officiel Vue Montréal",
+    "replays": "Replays",
+    "replaysYoutubeChannel": "Les replays sont disponibles sur notre chaîne YouTube →",
+    "replayVideoTitleFallback": "Replay"
+  },
+  "sponsors": {
+    "title": "Nos partenaires",
+    "financialTitle": "Partenaires financiers",
+    "platinum": "Platinum",
+    "gold": "Gold",
+    "silver": "Silver",
+    "bronze": "Bronze",
+    "communityTitle": "Partenaires communautaires",
+    "seeWebsite": "Voir le site",
+    "seeWebsiteArrow": "Voir le site →",
+    "noCommunitySponsors": "Aucun partenaire communautaire pour le moment.",
+    "tierAudience": {
+      "platinum": "Accès à +1 000 développeurs Vue/Nuxt",
+      "gold": "Accès à +1 000 développeurs Vue/Nuxt",
+      "silver": "Logo sur le site et les communications communautaires",
+      "bronze": "Logo sur la page partenaires"
+    },
+    "levels": {
+      "platinum": "Visibilité maximale, logo en tête de page, mention dans chaque communication",
+      "gold": "Logo prominent, présence sur les supports événements",
+      "silver": "Logo sur le site et les communications",
+      "bronze": "Logo sur la page partenaires"
+    }
+  },
+  "seo": {
+    "home": {
+      "title": "Vue Montreal | Communauté Vue.js à Montréal",
+      "description": "Vue Montreal organise des meetups Vue.js et Nuxt à Montréal: talks techniques, networking et opportunités pour la communauté frontend."
+    },
+    "about": {
+      "title": "À propos | Vue Montreal",
+      "description": "Découvrez l'histoire et la mission de Vue Montreal, la communauté Vue.js qui connecte les développeurs à Montréal."
+    },
+    "events": {
+      "title": "Événements Vue.js à Montréal | Vue Montreal",
+      "description": "Consultez les prochains meetups Vue.js et Nuxt à Montréal, ainsi que les événements passés et leurs replays."
+    },
+    "sponsors": {
+      "title": "Partenaires | Vue Montreal",
+      "description": "Nos partenaires financiers et communautaires qui soutiennent Vue Montreal et l'écosystème Vue/Nuxt à Montréal."
+    },
+    "contact": {
+      "title": "Contact | Vue Montreal",
+      "description": "Contactez l'équipe Vue Montreal pour proposer un talk, devenir partenaire ou accueillir un meetup."
+    },
+    "event": {
+      "fallbackTitle": "Événement | Vue Montreal",
+      "defaultDescription": "Retrouvez les détails d'un événement Vue Montreal: date, intervenants, lieu et informations pratiques."
+    }
+  }
+}

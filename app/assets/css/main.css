@@ -1,0 +1,40 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+@import "@nuxt/ui";
+
+@theme {
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Smooth transitions for color mode */
+html {
+  @apply transition-colors duration-300;
+}
+
+/* Subtle grid pattern for hero backgrounds */
+.bg-grid-pattern {
+  background-image:
+    linear-gradient(to right, rgb(0 0 0 / 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(0 0 0 / 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.dark .bg-grid-pattern {
+  background-image:
+    linear-gradient(to right, rgb(255 255 255 / 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(255 255 255 / 0.03) 1px, transparent 1px);
+}
+
+/* Glow effect for cards on hover */
+.card-glow {
+  @apply transition-all duration-300;
+}
+
+.card-glow:hover {
+  box-shadow: 0 0 40px -10px rgb(139 92 246 / 0.4);
+}
+
+.dark .card-glow:hover {
+  box-shadow: 0 0 40px -10px rgb(139 92 246 / 0.25);
+}
