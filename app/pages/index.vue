@@ -5,7 +5,14 @@
       <div class="grid min-h-[360px] lg:grid-cols-2 lg:min-h-[500px]">
         <!-- Texte -->
         <div class="flex flex-col justify-center px-5 py-10 sm:px-12 sm:py-16">
-        <NuxtImg src="logo.webp" :alt="$t('site.name')" class="h-auto w-44 max-w-full object-contain sm:w-60" />
+        <NuxtImg
+          src="logo.webp"
+          :alt="$t('site.name')"
+          width="593"
+          height="357"
+          sizes="(min-width: 640px) 240px, 176px"
+          class="h-auto w-44 max-w-full object-contain sm:w-60"
+        />
 
           <p class="mb-4 text-sm font-semibold uppercase tracking-wider text-primary">
             {{ $t('home.subtitle') }}
@@ -44,11 +51,15 @@
         </div>
         <!-- Image -->
         <div class="relative min-h-[280px] sm:min-h-[320px] lg:min-h-0">
-          <img
+          <NuxtImg
             :src="siteConfig.heroImageUrl"
             alt="Vue Montreal - communauté de développeurs"
-            class="absolute inset-0 size-full object-cover"
+            width="1200"
+            height="800"
+            sizes="(min-width: 1024px) 50vw, 100vw"
+            preload
             fetchpriority="high"
+            class="absolute inset-0 size-full object-cover"
           />
           <div class="absolute inset-0 bg-linear-to-t from-black/20 to-transparent lg:bg-linear-to-l lg:from-transparent" />
         </div>
@@ -90,10 +101,14 @@
     <!-- Section Communauté (photo + texte) -->
     <section class="grid gap-8 rounded-3xl border border-gray-200/80 bg-white p-0 overflow-hidden shadow-sm dark:border-gray-800 dark:bg-gray-900/50 lg:grid-cols-2">
       <div class="relative order-2 min-h-[300px] lg:order-1 lg:min-h-[400px]">
-        <img
+        <NuxtImg
           :src="siteConfig.communityImageUrl"
           :alt="$t('home.communityImageAlt')"
+          width="800"
+          height="534"
+          sizes="(min-width: 1024px) 50vw, 100vw"
           class="absolute inset-0 size-full object-cover"
+          loading="lazy"
         />
       </div>
       <div class="flex flex-col justify-center px-5 py-10 sm:px-12 sm:py-16 lg:order-2">
@@ -367,8 +382,30 @@ definePageMeta({
 })
 
 const siteConfig = useSiteConfig()
-const { locale } = useI18n()
+const { locale, t } = useI18n()
 const newsletterEmail = ref('')
+
+usePageSeo({
+  title: t('seo.home.title'),
+  description: t('seo.home.description'),
+  image: siteConfig.heroImageUrl,
+})
+
+useJsonLd({
+  id: 'breadcrumbs-home',
+  value: {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Vue Montreal',
+        item: siteConfig.siteUrl,
+      },
+    ],
+  },
+})
 
 function onNewsletterSubmit(e: Event) {
   if (!siteConfig.newsletterUrl) e.preventDefault()

@@ -152,7 +152,25 @@
 <script setup lang="ts">
 definePageMeta({ ssr: true })
 
-const { locale } = useI18n()
+const { locale, t } = useI18n()
+const siteConfig = useSiteConfig()
+
+usePageSeo({
+  title: t('seo.sponsors.title'),
+  description: t('seo.sponsors.description'),
+})
+
+useJsonLd({
+  id: 'breadcrumbs-sponsors',
+  value: {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Vue Montreal', item: siteConfig.siteUrl },
+      { '@type': 'ListItem', position: 2, name: t('nav.sponsors'), item: `${siteConfig.siteUrl.replace(/\/+$/, '')}/sponsors` },
+    ],
+  },
+})
 
 const { data: sponsors, pending } = await useFetch<any[]>('/api/public/sponsors', {
   key: computed(() => `sponsors-page-${locale.value}`),

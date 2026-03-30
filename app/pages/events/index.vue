@@ -126,7 +126,25 @@
 <script setup lang="ts">
 definePageMeta({ ssr: true })
 
-const { locale } = useI18n()
+const { locale, t } = useI18n()
+const siteConfig = useSiteConfig()
+
+usePageSeo({
+  title: t('seo.events.title'),
+  description: t('seo.events.description'),
+})
+
+useJsonLd({
+  id: 'breadcrumbs-events',
+  value: {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Vue Montreal', item: siteConfig.siteUrl },
+      { '@type': 'ListItem', position: 2, name: t('nav.events'), item: `${siteConfig.siteUrl.replace(/\/+$/, '')}/events` },
+    ],
+  },
+})
 
 const { data: rawEvents, pending } = await useFetch<any[]>('/api/public/events', {
   key: computed(() => `events-list-${locale.value}`),

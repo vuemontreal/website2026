@@ -3,7 +3,7 @@
  * Enrichit la réponse en remplaçant les IDs speakers/sponsors par les objets complets (routes publiques hub).
  */
 
-export default defineEventHandler(async (event) => {
+export default defineCachedEventHandler(async (event) => {
   const id = getRouterParam(event, 'id')
   if (!id) throw createError({ statusCode: 400, message: 'ID manquant' })
 
@@ -14,6 +14,8 @@ export default defineEventHandler(async (event) => {
   const data = await fetchThemeethub<any>(`/api/public/events/${id}`, {
     ...(hubQuery ? { query: hubQuery } : {}),
     cache: 'force-cache',
+    timeoutMs: 1200,
+    cacheMaxAgeSec: 300,
     fallback: null,
   })
   if (!data) throw createError({ statusCode: 404, message: 'Événement non trouvé' })
@@ -26,6 +28,8 @@ export default defineEventHandler(async (event) => {
       fetchThemeethub<any>(`/api/public/speakers/${sid}`, {
         ...(hubQuery ? { query: hubQuery } : {}),
         cache: 'force-cache',
+        timeoutMs: 1000,
+        cacheMaxAgeSec: 300,
         fallback: null,
       }),
     )).then((list) => list.filter(Boolean)),
@@ -33,6 +37,8 @@ export default defineEventHandler(async (event) => {
       fetchThemeethub<any>(`/api/public/sponsors/${sid}`, {
         ...(hubQuery ? { query: hubQuery } : {}),
         cache: 'force-cache',
+        timeoutMs: 1000,
+        cacheMaxAgeSec: 300,
         fallback: null,
       }),
     )).then((list) => list.filter(Boolean)),
@@ -46,4 +52,13 @@ export default defineEventHandler(async (event) => {
       name: s.companyName ?? s.name,
     })),
   }
+}, {
+  maxAge: 300,
+  swr: true,
+  getKey: (event) => {
+    const id = getRouterParam(event, 'id') || 'unknown'
+    const query = getQuery(event)
+    const locale = typeof query.locale === 'string' ? query.locale : 'default'
+    return `public-event:${id}:${locale}`
+  },
 })

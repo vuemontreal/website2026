@@ -319,6 +319,7 @@ definePageMeta({ ssr: true })
 const route = useRoute()
 const { locale, t } = useI18n()
 const { toSanitizedRichHtml, toPlainTextExcerpt } = useRichText()
+const siteConfig = useSiteConfig()
 
 const eventDescriptionHtml = computed(() => toSanitizedRichHtml(event.value?.description))
 const id = computed(() => route.params.id as string)
@@ -589,16 +590,88 @@ function sponsorName(sponsor: { name?: string; companyName?: string }) {
   return sponsor?.name ?? sponsor?.companyName ?? ''
 }
 
-useHead({
-  title: () => event.value?.title ? `${event.value.title} — Vue Montreal` : 'Événement — Vue Montreal',
-  meta: [
-    {
-      name: 'description',
-      content: () =>
-        toPlainTextExcerpt(event.value?.description, 160)
-        || `${event.value?.title ?? ''} — Vue Montreal`,
-    },
-  ],
+const eventDescription = computed(() =>
+  toPlainTextExcerpt(event.value?.description, 160)
+  || t('seo.event.defaultDescription'),
+)
+
+usePageSeo({
+  title: event.value?.title ? `${event.value.title} — Vue Montreal` : t('seo.event.fallbackTitle'),
+  description: eventDescription.value,
+  image: bannerUrl.value || undefined,
+  type: 'article',
+  noindex: !event.value,
+})
+
+if (import.meta.server && !event.value) {
+  setResponseStatus(useRequestEvent(), 404, 'Not Found')
+}
+
+const eventCanonicalUrl = computed(() => `${siteConfig.siteUrl.replace(/\/+$/, '')}${route.path}`)
+
+const eventJsonLd = computed(() => {
+  const e = event.value
+  if (!e) return null
+
+  const startDate = typeof e.date === 'string' && e.date ? new Date(e.date).toISOString() : undefined
+  const endDate = typeof e.endDate === 'string' && e.endDate ? new Date(e.endDate).toISOString() : undefined
+
+  const mode = eventFormatKey.value
+  const isOnline = mode === 'online' || mode === 'hybrid'
+  const isInPerson = mode === 'in_person' || mode === 'hybrid'
+
+  const venue = e.venue ?? null
+  const venueName = venue?.name ?? undefined
+  const addressParts = [venue?.address, venue?.city, venue?.state, venue?.country].filter(Boolean)
+
+  const location: Array<Record<string, unknown>> = []
+  if (isInPerson && (venueName || addressParts.length)) {
+    location.push({
+      '@type': 'Place',
+      name: venueName,
+      address: addressParts.length
+        ? { '@type': 'PostalAddress', streetAddress: venue?.address, addressLocality: venue?.city, addressRegion: venue?.state, addressCountry: venue?.country }
+        : undefined,
+    })
+  }
+  if (isOnline) {
+    location.push({ '@type': 'VirtualLocation', url: eventCanonicalUrl.value })
+  }
+
+  const performers = (speakers.value ?? [])
+    .map((s: any) => {
+      const name = (s?.name || s?.title || '').toString().trim()
+      if (!name) return null
+      return { '@type': 'Person', name }
+    })
+    .filter(Boolean)
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Event',
+    '@id': `${eventCanonicalUrl.value}#event`,
+    name: e.title,
+    description: eventDescription.value,
+    image: bannerUrl.value || undefined,
+    url: eventCanonicalUrl.value,
+    eventAttendanceMode: isOnline && !isInPerson
+      ? 'https://schema.org/OnlineEventAttendanceMode'
+      : isOnline && isInPerson
+        ? 'https://schema.org/MixedEventAttendanceMode'
+        : 'https://schema.org/OfflineEventAttendanceMode',
+    eventStatus: 'https://schema.org/EventScheduled',
+    startDate,
+    endDate,
+    inLanguage: locale.value,
+    location: location.length ? location : undefined,
+    organizer: { '@type': 'Organization', name: 'Vue Montreal', url: siteConfig.siteUrl },
+    performer: performers.length ? performers : undefined,
+  }
+})
+
+useJsonLd({
+  id: 'event',
+  value: eventJsonLd.value,
 })
 
 function formatDate(dateStr: string) {

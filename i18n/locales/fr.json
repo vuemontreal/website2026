@@ -152,5 +152,31 @@
       "silver": "Logo sur le site et les communications",
       "bronze": "Logo sur la page partenaires"
     }
+  },
+  "seo": {
+    "home": {
+      "title": "Vue Montreal | Communauté Vue.js à Montréal",
+      "description": "Vue Montreal organise des meetups Vue.js et Nuxt à Montréal: talks techniques, networking et opportunités pour la communauté frontend."
+    },
+    "about": {
+      "title": "À propos | Vue Montreal",
+      "description": "Découvrez l'histoire et la mission de Vue Montreal, la communauté Vue.js qui connecte les développeurs à Montréal."
+    },
+    "events": {
+      "title": "Événements Vue.js à Montréal | Vue Montreal",
+      "description": "Consultez les prochains meetups Vue.js et Nuxt à Montréal, ainsi que les événements passés et leurs replays."
+    },
+    "sponsors": {
+      "title": "Partenaires | Vue Montreal",
+      "description": "Nos partenaires financiers et communautaires qui soutiennent Vue Montreal et l'écosystème Vue/Nuxt à Montréal."
+    },
+    "contact": {
+      "title": "Contact | Vue Montreal",
+      "description": "Contactez l'équipe Vue Montreal pour proposer un talk, devenir partenaire ou accueillir un meetup."
+    },
+    "event": {
+      "fallbackTitle": "Événement | Vue Montreal",
+      "defaultDescription": "Retrouvez les détails d'un événement Vue Montreal: date, intervenants, lieu et informations pratiques."
+    }
   }
 }

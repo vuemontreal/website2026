@@ -4,7 +4,14 @@
     <header class="sticky top-0 z-50 border-b border-gray-200/60 bg-white/80 backdrop-blur-xl dark:border-gray-800/60 dark:bg-gray-950/80">
       <div class="mx-auto flex h-16 max-w-7xl min-w-0 items-center justify-between gap-2 px-3 sm:gap-3 sm:px-6 lg:px-8">
         <NuxtLink to="/" class="flex min-w-0 shrink-0 items-center gap-2 text-xl font-bold text-primary transition hover:text-primary-600 dark:hover:text-primary-400">
-          <NuxtImg src="logo.webp" :alt="$t('site.name')" class="h-9 w-auto max-w-20 object-contain sm:h-10" />
+          <NuxtImg
+            src="logo.webp"
+            :alt="$t('site.name')"
+            width="593"
+            height="357"
+            sizes="160px"
+            class="h-9 w-auto max-w-20 object-contain sm:h-10"
+          />
         </NuxtLink>
 
         <nav class="hidden min-w-0 items-center gap-1 sm:flex">

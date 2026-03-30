@@ -9,24 +9,68 @@ export function getThemeethubUrl(path: string): string {
   return `${base.replace(/\/$/, '')}${path.startsWith('/') ? path : `/${path}`}`
 }
 
+type ThemeethubCacheEntry<T> = {
+  expiresAt: number
+  data: T
+}
+
+function getQueryCacheSegment(query?: Record<string, string>) {
+  if (!query) return ''
+  const entries = Object.entries(query).sort(([a], [b]) => a.localeCompare(b))
+  return entries.map(([k, v]) => `${k}=${v}`).join('&')
+}
+
 export async function fetchThemeethub<T>(
   path: string,
   options?: {
     query?: Record<string, string>
     cache?: RequestCache
+    /** Timeout (ms) pour éviter de bloquer le SSR si le hub est down */
+    timeoutMs?: number
+    /** Active un cache mémoire Nitro (TTL en secondes) */
+    cacheMaxAgeSec?: number
     /** Valeur retournée si TheMeetHub est indisponible (ex. ECONNREFUSED) */
     fallback?: T
   },
 ): Promise<T> {
   const url = getThemeethubUrl(path)
-  const { fallback, query, cache } = options ?? {}
+  const { fallback, query, cache, timeoutMs, cacheMaxAgeSec } = options ?? {}
+  const cacheTtlMs = (cacheMaxAgeSec ?? 0) * 1000
+  const cacheKey = cacheTtlMs > 0
+    ? `themeethub:${url}?${getQueryCacheSegment(query)}`
+    : null
+
+  if (cacheKey) {
+    const storage = useStorage('cache')
+    const cached = await storage.getItem<ThemeethubCacheEntry<T>>(cacheKey)
+    if (cached && cached.expiresAt > Date.now()) {
+      return cached.data
+    }
+  }
+
   try {
-    return await $fetch<T>(url, {
+    const data = await $fetch<T>(url, {
       query,
       cache,
+      timeout: timeoutMs ?? 350,
       credentials: 'omit',
     })
+    if (cacheKey) {
+      const storage = useStorage('cache')
+      await storage.setItem(cacheKey, {
+        expiresAt: Date.now() + cacheTtlMs,
+        data,
+      } satisfies ThemeethubCacheEntry<T>)
+    }
+    return data
   } catch (e) {
+    // Si le hub est indisponible et qu'on a une valeur expirée en cache, on renvoie quand meme
+    // cette valeur stale pour proteger le SSR.
+    if (cacheKey) {
+      const storage = useStorage('cache')
+      const cached = await storage.getItem<ThemeethubCacheEntry<T>>(cacheKey)
+      if (cached) return cached.data
+    }
     if (fallback !== undefined) return fallback
     throw e
   }

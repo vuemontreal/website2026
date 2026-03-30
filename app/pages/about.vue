@@ -173,5 +173,23 @@ definePageMeta({
 })
 
 const siteConfig = useSiteConfig()
+const { t } = useI18n()
+
+usePageSeo({
+  title: t('seo.about.title'),
+  description: t('seo.about.description'),
+})
+
+useJsonLd({
+  id: 'breadcrumbs-about',
+  value: {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Vue Montreal', item: siteConfig.siteUrl },
+      { '@type': 'ListItem', position: 2, name: t('nav.about'), item: `${siteConfig.siteUrl.replace(/\/+$/, '')}/about` },
+    ],
+  },
+})
 </script>
 

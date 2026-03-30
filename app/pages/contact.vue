@@ -46,6 +46,23 @@ definePageMeta({ ssr: true })
 const siteConfig = useSiteConfig()
 const { t } = useI18n()
 
+usePageSeo({
+  title: t('seo.contact.title'),
+  description: t('seo.contact.description'),
+})
+
+useJsonLd({
+  id: 'breadcrumbs-contact',
+  value: {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Vue Montreal', item: siteConfig.siteUrl },
+      { '@type': 'ListItem', position: 2, name: t('nav.contact'), item: `${siteConfig.siteUrl.replace(/\/+$/, '')}/contact` },
+    ],
+  },
+})
+
 const contactSections = computed(() => [
   {
     id: 'questions',
