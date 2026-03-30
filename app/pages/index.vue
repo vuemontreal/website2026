@@ -40,19 +40,6 @@
             >
               {{ $t('home.joinGuild') }}
             </a>
-            <div class="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-gray-500 dark:text-gray-400">
-              <span class="inline-flex items-baseline gap-1">
-                <span class="font-semibold text-primary">980+</span>
-                <span>membres</span>
-              </span>
-              <span class="text-gray-300 dark:text-gray-700">•</span>
-              <span class="inline-flex items-baseline gap-1">
-                <span class="font-semibold text-primary">{{ meetupsCount }}</span>
-                <span>{{ $t('home.meetupsLabel', { count: meetupsCount }) }}</span>
-              </span>
-              <span class="text-gray-300 dark:text-gray-700">•</span>
-              <span>Montréal</span>
-            </div>
           </div>
         </div>
         <!-- Image -->
@@ -63,7 +50,39 @@
             class="absolute inset-0 size-full object-cover"
             fetchpriority="high"
           />
-          <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent lg:bg-gradient-to-l lg:from-transparent" />
+          <div class="absolute inset-0 bg-linear-to-t from-black/20 to-transparent lg:bg-linear-to-l lg:from-transparent" />
+        </div>
+      </div>
+    </section>
+
+    <!-- Barre de stats -->
+    <section class="rounded-3xl bg-gray-50/70 px-5 py-8 shadow-sm dark:bg-gray-900/20 sm:px-12 sm:py-10">
+      <div class="grid gap-6 sm:grid-cols-3 sm:gap-8">
+        <div class="text-center">
+          <div class="text-3xl font-extrabold tracking-tight text-green-600 dark:text-green-500 sm:text-4xl">
+            980+
+          </div>
+          <div class="mt-1 text-xs font-medium uppercase tracking-wider text-gray-600 dark:text-gray-400">
+            {{ $t('home.statsMembersLabel') }}
+          </div>
+        </div>
+
+        <div class="text-center">
+          <div class="text-3xl font-extrabold tracking-tight text-green-600 dark:text-green-500 sm:text-4xl">
+            {{ meetupsCount }}
+          </div>
+          <div class="mt-1 text-xs font-medium uppercase tracking-wider text-gray-600 dark:text-gray-400">
+            {{ $t('home.meetupsLabel', { count: meetupsCount }) }}
+          </div>
+        </div>
+
+        <div class="text-center">
+          <div class="text-3xl font-extrabold tracking-tight text-green-600 dark:text-green-500 sm:text-4xl">
+            Montréal
+          </div>
+          <div class="mt-1 text-xs font-medium uppercase tracking-wider text-gray-600 dark:text-gray-400">
+            {{ $t('home.statsCityLabel') }}
+          </div>
         </div>
       </div>
     </section>
@@ -73,7 +92,7 @@
       <div class="relative order-2 min-h-[300px] lg:order-1 lg:min-h-[400px]">
         <img
           :src="siteConfig.communityImageUrl"
-          alt="Communauté Vue Montreal"
+          :alt="$t('home.communityImageAlt')"
           class="absolute inset-0 size-full object-cover"
         />
       </div>
@@ -84,6 +103,52 @@
         <p class="mt-6 text-lg leading-relaxed text-gray-600 dark:text-gray-300">
           {{ $t('home.communityDesc') }}
         </p>
+        <ul class="mt-6 flex flex-col gap-3 sm:gap-4">
+          <li class="flex items-start gap-4 rounded-2xl border border-gray-200/80 bg-white/60 p-4 backdrop-blur dark:border-gray-800 dark:bg-gray-900/30">
+            <UIcon name="i-heroicons-user-group" class="mt-0.5 size-6 shrink-0 text-primary" />
+            <div class="min-w-0">
+              <h3 class="text-base font-semibold text-gray-900 dark:text-gray-100">
+                {{ $t('home.communityCardConnectTitle') }}
+              </h3>
+              <p class="mt-1 text-sm leading-relaxed text-gray-600 dark:text-gray-300">
+                {{ $t('home.communityCardConnectDesc') }}
+              </p>
+            </div>
+          </li>
+          <li class="flex items-start gap-4 rounded-2xl border border-gray-200/80 bg-white/60 p-4 backdrop-blur dark:border-gray-800 dark:bg-gray-900/30">
+            <UIcon name="i-heroicons-book-open" class="mt-0.5 size-6 shrink-0 text-primary" />
+            <div class="min-w-0">
+              <h3 class="text-base font-semibold text-gray-900 dark:text-gray-100">
+                {{ $t('home.communityCardLearnTitle') }}
+              </h3>
+              <p class="mt-1 text-sm leading-relaxed text-gray-600 dark:text-gray-300">
+                {{ $t('home.communityCardLearnDesc') }}
+              </p>
+            </div>
+          </li>
+          <li class="flex items-start gap-4 rounded-2xl border border-gray-200/80 bg-white/60 p-4 backdrop-blur dark:border-gray-800 dark:bg-gray-900/30">
+            <UIcon name="i-heroicons-briefcase" class="mt-0.5 size-6 shrink-0 text-primary" />
+            <div class="min-w-0">
+              <h3 class="text-base font-semibold text-gray-900 dark:text-gray-100">
+                {{ $t('home.communityCardCareerTitle') }}
+              </h3>
+              <p class="mt-1 text-sm leading-relaxed text-gray-600 dark:text-gray-300">
+                {{ $t('home.communityCardCareerDesc') }}
+              </p>
+            </div>
+          </li>
+          <li class="flex items-start gap-4 rounded-2xl border border-gray-200/80 bg-white/60 p-4 backdrop-blur dark:border-gray-800 dark:bg-gray-900/30">
+            <UIcon name="i-heroicons-code-bracket" class="mt-0.5 size-6 shrink-0 text-primary" />
+            <div class="min-w-0">
+              <h3 class="text-base font-semibold text-gray-900 dark:text-gray-100">
+                {{ $t('home.communityCardContributeTitle') }}
+              </h3>
+              <p class="mt-1 text-sm leading-relaxed text-gray-600 dark:text-gray-300">
+                {{ $t('home.communityCardContributeDesc') }}
+              </p>
+            </div>
+          </li>
+        </ul>
         <NuxtLink
           to="/events"
           class="mt-8 inline-flex items-center gap-2 font-semibold text-primary hover:underline"
@@ -91,6 +156,47 @@
           {{ $t('home.communityCta') }}
           <UIcon name="i-heroicons-arrow-right" class="size-4" />
         </NuxtLink>
+      </div>
+    </section>
+
+    <!-- Pourquoi rejoindre Vue Montréal ? -->
+    <section class="rounded-3xl border border-gray-200/80 bg-gray-50/50 p-5 py-10 shadow-sm dark:border-gray-800 dark:bg-gray-900/20 sm:p-12 sm:py-16">
+      <div class="mx-auto max-w-3xl text-center">
+        <h2 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-3xl md:text-4xl">
+          {{ $t('home.whyJoinTitle') }}
+        </h2>
+      </div>
+
+      <div class="mt-10 grid gap-6 sm:grid-cols-3">
+        <div class="flex flex-col rounded-2xl border border-gray-200/80 bg-white/60 p-6 backdrop-blur dark:border-gray-800 dark:bg-gray-900/30">
+          <UIcon name="i-heroicons-globe-alt" class="size-7 text-primary" />
+          <h3 class="mt-4 text-lg font-semibold text-gray-900 dark:text-gray-100">
+            {{ $t('home.whyJoinCard1Title') }}
+          </h3>
+          <p class="mt-2 text-sm leading-relaxed text-gray-600 dark:text-gray-300">
+            {{ $t('home.whyJoinCard1Desc') }}
+          </p>
+        </div>
+
+        <div class="flex flex-col rounded-2xl border border-gray-200/80 bg-white/60 p-6 backdrop-blur dark:border-gray-800 dark:bg-gray-900/30">
+          <UIcon name="i-heroicons-star" class="size-7 text-primary" />
+          <h3 class="mt-4 text-lg font-semibold text-gray-900 dark:text-gray-100">
+            {{ $t('home.whyJoinCard2Title') }}
+          </h3>
+          <p class="mt-2 text-sm leading-relaxed text-gray-600 dark:text-gray-300">
+            {{ $t('home.whyJoinCard2Desc') }}
+          </p>
+        </div>
+
+        <div class="flex flex-col rounded-2xl border border-gray-200/80 bg-white/60 p-6 backdrop-blur dark:border-gray-800 dark:bg-gray-900/30">
+          <UIcon name="i-heroicons-computer-network" class="size-7 text-primary" />
+          <h3 class="mt-4 text-lg font-semibold text-gray-900 dark:text-gray-100">
+            {{ $t('home.whyJoinCard3Title') }}
+          </h3>
+          <p class="mt-2 text-sm leading-relaxed text-gray-600 dark:text-gray-300">
+            {{ $t('home.whyJoinCard3Desc') }}
+          </p>
+        </div>
       </div>
     </section>
 
@@ -135,7 +241,7 @@
             </div>
           </div>
           <div class="p-6">
-            <h3 class="break-words text-lg font-bold text-gray-900 transition group-hover:text-primary dark:text-gray-100">
+            <h3 class="wrap-break-word text-lg font-bold text-gray-900 transition group-hover:text-primary dark:text-gray-100">
               {{ event.title }}
             </h3>
             <p v-if="event.date" class="mt-2 text-sm font-medium text-primary">

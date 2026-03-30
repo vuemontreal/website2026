@@ -20,47 +20,94 @@
       <UIcon name="i-heroicons-arrow-path" class="size-10 animate-spin text-primary" />
     </section>
 
-    <section v-else-if="groupedSponsors && Object.keys(groupedSponsors).length" class="space-y-8">
-      <div
-        v-for="(list, tier) in groupedSponsors"
-        :key="tier"
-        class="rounded-2xl border border-gray-200/80 bg-white p-5 shadow-sm dark:border-gray-800 dark:bg-gray-900/50 sm:p-8"
-      >
-        <h2 class="mb-4 text-base font-bold uppercase tracking-wider text-primary sm:mb-6 sm:text-lg">
-          {{ $t(`sponsors.${tier}`) }}
+    <template v-else>
+      <!-- Partenaires financiers -->
+      <section v-if="groupedFinancialSponsors && Object.keys(groupedFinancialSponsors).length" class="space-y-8">
+        <h2 class="text-2xl font-bold tracking-tight sm:text-3xl">
+          {{ $t('sponsors.financialTitle') }}
         </h2>
-        <div class="flex flex-wrap items-center justify-center gap-6 sm:justify-start sm:gap-8 md:gap-10">
-          <a
-            v-for="sponsor in list"
-            :key="sponsor.id ?? sponsor.name ?? sponsor.companyName"
-            :href="sponsor.websiteUrl || sponsor.url || '#'"
-            :target="(sponsor.websiteUrl || sponsor.url) ? '_blank' : undefined"
-            :rel="(sponsor.websiteUrl || sponsor.url) ? 'noopener noreferrer' : undefined"
-            class="flex items-center transition hover:opacity-80"
+        <div
+          v-for="(list, tier) in groupedFinancialSponsors"
+          :key="tier"
+          class="rounded-2xl border border-gray-200/80 bg-white p-5 shadow-sm dark:border-gray-800 dark:bg-gray-900/50 sm:p-8"
+        >
+          <h3 class="mb-4 text-base font-bold uppercase tracking-wider text-primary sm:mb-6 sm:text-lg">
+            {{ $t(`sponsors.${tier}`) }}
+          </h3>
+          <div class="flex flex-wrap items-center justify-center gap-6 sm:justify-start sm:gap-8 md:gap-10">
+            <a
+              v-for="sponsor in list"
+              :key="sponsor.id ?? sponsor.name ?? sponsor.companyName"
+              :href="partnerHref(sponsor) || '#'"
+              :target="partnerHref(sponsor) ? '_blank' : undefined"
+              :rel="partnerHref(sponsor) ? 'noopener noreferrer' : undefined"
+              class="flex items-center gap-3 rounded-xl border border-gray-200/80 bg-white px-4 py-3 shadow-sm transition hover:border-primary/40 hover:bg-primary/5 dark:border-gray-800 dark:bg-gray-900/50"
+            >
+              <img
+                v-if="partnerLogo(sponsor)"
+                :src="partnerLogo(sponsor)!"
+                :alt="partnerName(sponsor)"
+                class="h-10 max-w-[140px] object-contain"
+              />
+              <span class="min-w-0 flex-1 truncate text-sm font-semibold text-gray-700 dark:text-gray-300">
+                {{ partnerName(sponsor) }}
+              </span>
+              <span class="shrink-0 rounded-lg bg-primary px-3 py-1.5 text-xs font-semibold text-white shadow-sm transition hover:bg-primary/90">
+                {{ $t('sponsors.seeWebsite') }}
+              </span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Partenaires communautaires -->
+      <section v-if="communityPartners.length" class="space-y-6 rounded-2xl border border-gray-200/80 bg-white p-5 shadow-sm dark:border-gray-800 dark:bg-gray-900/50 sm:p-8">
+        <h2 class="text-2xl font-bold tracking-tight sm:text-3xl">
+          {{ $t('sponsors.communityTitle') }}
+        </h2>
+        <div class="flex flex-wrap items-center justify-center gap-4 sm:justify-start sm:gap-6">
+          <div
+            v-for="partner in communityPartners"
+            :key="partner.id ?? partner.name ?? partner.companyName"
+            class="flex items-center gap-3 rounded-xl border border-gray-200/80 bg-white px-4 py-3 shadow-sm transition hover:border-primary/40 hover:bg-primary/5 dark:border-gray-800 dark:bg-gray-900/50"
           >
             <img
-              v-if="sponsor.logoUrl || sponsor.logo || sponsor.image"
-              :src="sponsor.logoUrl || sponsor.logo || sponsor.image"
-              :alt="sponsor.name || sponsor.companyName"
-              class="h-12 max-w-[140px] object-contain"
+              v-if="partnerLogo(partner)"
+              :src="partnerLogo(partner)!"
+              :alt="partnerName(partner)"
+              class="h-10 max-w-[140px] object-contain"
             />
-            <span v-else class="font-semibold text-gray-700 dark:text-gray-300">{{ sponsor.name || sponsor.companyName }}</span>
-          </a>
+            <span class="min-w-0 flex-1 truncate text-sm font-semibold text-gray-700 dark:text-gray-300">
+              {{ partnerName(partner) }}
+            </span>
+            <a
+              v-if="partnerHref(partner)"
+              :href="partnerHref(partner)!"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="shrink-0 rounded-lg bg-primary px-3 py-1.5 text-xs font-semibold text-white shadow-sm transition hover:bg-primary/90"
+            >
+              {{ $t('sponsors.seeWebsiteArrow') }}
+            </a>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section v-else class="rounded-2xl border-2 border-dashed border-gray-300 bg-gray-50 px-4 py-12 text-center dark:border-gray-700 dark:bg-gray-900/30 sm:p-16">
-      <p class="text-gray-600 dark:text-gray-400">
-        {{ $t('home.noSponsors') }}
-      </p>
-      <NuxtLink
-        to="/contact#sponsoring"
-        class="mt-6 inline-block font-semibold text-primary hover:underline"
+      <section
+        v-if="!hasVisibleSections"
+        class="rounded-2xl border-2 border-dashed border-gray-300 bg-gray-50 px-4 py-12 text-center dark:border-gray-700 dark:bg-gray-900/30 sm:p-16"
       >
-        {{ $t('home.becomeSponsor') }} →
-      </NuxtLink>
-    </section>
+        <p class="text-gray-600 dark:text-gray-400">
+          {{ $t('home.noSponsors') }}
+        </p>
+        <NuxtLink
+          to="/contact#sponsoring"
+          class="mt-6 inline-block font-semibold text-primary hover:underline"
+        >
+          {{ $t('home.becomeSponsor') }} →
+        </NuxtLink>
+      </section>
+    </template>
 
     <!-- Niveaux -->
     <section class="rounded-2xl border border-gray-200/80 bg-white p-5 shadow-sm dark:border-gray-800 dark:bg-gray-900/50 sm:p-8 md:p-10">
@@ -114,10 +161,47 @@ const { data: sponsors, pending } = await useFetch<any[]>('/api/public/sponsors'
   default: () => [],
 })
 
+type SponsorCategory = 'financial' | 'financial_event' | 'community' | 'unknown'
+
+function getSponsorCategory(s: any): SponsorCategory {
+  // Back-office: champ `Type` avec options "Financier", "Communautaire", "Financier par event"
+  const rawType = s?.Type ?? s?.type
+  const t = rawType == null ? '' : String(rawType).trim().toLowerCase()
+  if (!t) return 'unknown'
+  if (t.includes('event')) return 'financial_event'
+  if (t.includes('commun')) return 'community'
+  if (t.includes('finan')) return 'financial'
+  return 'unknown'
+}
+
+function partnerLogo(p: any): string | null {
+  return p?.logoUrl || p?.logo || p?.image || null
+}
+
+function partnerName(p: any): string {
+  return p?.name || p?.companyName || p?.organisationName || p?.communityName || '—'
+}
+
+function partnerHref(p: any): string | null {
+  return p?.websiteUrl || p?.url || p?.website || p?.link || null
+}
+
+const communityPartners = computed(() => {
+  const list = sponsors.value ?? []
+  const partners = list.filter((s) => getSponsorCategory(s) === 'community')
+  partners.sort((a, b) => partnerName(a).localeCompare(partnerName(b)))
+  return partners
+})
+
 const TIER_ORDER = ['platinum', 'gold', 'silver', 'bronze'] as const
 
-const groupedSponsors = computed(() => {
-  const list = sponsors.value ?? []
+const groupedFinancialSponsors = computed(() => {
+  // Backward compat: si `Type` n'existe pas encore, on considère "financier".
+  // Exclusion explicite des sponsors "financier par event" sur la page /sponsors.
+  const list = (sponsors.value ?? []).filter((s) => {
+    const category = getSponsorCategory(s)
+    return category === 'financial' || category === 'unknown'
+  })
   if (!list.length) return null
   const byTier: Record<string, any[]> = {}
   for (const s of list) {
@@ -130,5 +214,10 @@ const groupedSponsors = computed(() => {
     if (byTier[t]) byTier[t].sort((a, b) => (a.name ?? a.companyName ?? '').localeCompare(b.name ?? b.companyName ?? ''))
   }
   return Object.fromEntries(TIER_ORDER.filter(t => byTier[t]).map(t => [t, byTier[t]]))
+})
+
+const hasVisibleSections = computed(() => {
+  const hasFinancial = !!(groupedFinancialSponsors.value && Object.keys(groupedFinancialSponsors.value).length)
+  return hasFinancial || communityPartners.value.length > 0
 })
 </script>

@@ -173,12 +173,12 @@
           </section>
 
           <!-- Sponsors / Partenaires -->
-          <section>
+          <section v-if="displaySponsors.length">
             <h2 class="mb-6 text-xl font-semibold">
               {{ $t('event.sponsors') }}
             </h2>
-            <div v-if="sponsors?.length" class="flex flex-wrap items-center justify-center gap-6 rounded-xl border border-gray-200/80 bg-gray-50/80 p-4 dark:border-gray-800 dark:bg-gray-800/30 sm:justify-start sm:gap-8 sm:p-6 md:p-8">
-              <template v-for="(sponsor, i) in sponsors" :key="i">
+            <div class="flex flex-wrap items-center justify-center gap-6 rounded-xl border border-gray-200/80 bg-gray-50/80 p-4 dark:border-gray-800 dark:bg-gray-800/30 sm:justify-start sm:gap-8 sm:p-6 md:p-8">
+              <template v-for="(sponsor, i) in displaySponsors" :key="i">
                 <a
                   v-if="sponsorWebsite(sponsor)"
                   :href="sponsorWebsite(sponsor)!"
@@ -189,25 +189,32 @@
                   <img
                     v-if="sponsorLogo(sponsor)"
                     :src="sponsorLogo(sponsor)!"
-                    :alt="sponsor.name"
+                    :alt="sponsorName(sponsor)"
                     class="h-12 max-w-[180px] object-contain"
                   >
-                  <span v-else class="font-semibold text-primary">{{ sponsor.name }}</span>
+                  <div class="min-w-0">
+                    <span class="block font-semibold text-primary">{{ sponsorName(sponsor) }}</span>
+                    <p v-if="sponsor.isOfficial" class="mt-0.5 text-xs text-gray-500 dark:text-gray-400">
+                      {{ $t('event.officialSponsorLabel') }}
+                    </p>
+                  </div>
                 </a>
                 <span v-else class="flex items-center gap-3">
                   <img
                     v-if="sponsorLogo(sponsor)"
                     :src="sponsorLogo(sponsor)!"
-                    :alt="sponsor.name"
+                    :alt="sponsorName(sponsor)"
                     class="h-12 max-w-[180px] object-contain"
                   >
-                  <span v-else class="font-semibold text-primary">{{ sponsor.name }}</span>
+                  <div class="min-w-0">
+                    <span class="block font-semibold text-primary">{{ sponsorName(sponsor) }}</span>
+                    <p v-if="sponsor.isOfficial" class="mt-0.5 text-xs text-gray-500 dark:text-gray-400">
+                      {{ $t('event.officialSponsorLabel') }}
+                    </p>
+                  </div>
                 </span>
               </template>
             </div>
-            <p v-else class="rounded-xl border border-gray-200/80 bg-gray-50/80 p-6 text-gray-500 dark:border-gray-800 dark:bg-gray-800/30 dark:text-gray-400">
-              {{ $t('event.noSponsors') }}
-            </p>
           </section>
         </div>
 
@@ -321,6 +328,13 @@ const { data: event, pending } = await useFetch<any>(() => `/api/public/events/$
   query: computed(() => ({ locale: locale.value })),
   getCachedData: (key) => useNuxtData(key).data.value,
   default: () => null,
+})
+
+const { data: allSponsors } = await useFetch<any[]>('/api/public/sponsors', {
+  key: computed(() => `event-global-sponsors-${locale.value}`),
+  query: computed(() => ({ locale: locale.value })),
+  getCachedData: (key) => useNuxtData(key).data.value,
+  default: () => [],
 })
 
 const { getEventBannerUrl } = useEventImage()
@@ -463,11 +477,45 @@ const speakers = computed(() => {
   })
 })
 
-const sponsors = computed(() => {
+type SponsorCategory = 'financial' | 'financial_event' | 'community' | 'unknown'
+
+function sponsorTypeRaw(s: any): string {
+  const raw = s?.Type ?? s?.type ?? ''
+  return String(raw).trim().toLowerCase()
+}
+
+function sponsorCategory(s: any): SponsorCategory {
+  const type = sponsorTypeRaw(s)
+  if (!type) return 'unknown'
+  if (type.includes('commun')) return 'community'
+  if (type.includes('event') && type.includes('finan')) return 'financial_event'
+  if (type.includes('finan')) return 'financial'
+  return 'unknown'
+}
+
+const eventSponsors = computed(() => {
   const e = event.value
   const list = e?.sponsors ?? e?.Sponsors ?? e?.partners ?? e?.Partners
   const arr = Array.isArray(list) ? list : []
   return arr.filter((s: any) => s && (s.name || s.companyName || s.logoUrl || s.logo || s.image))
+})
+
+const displaySponsors = computed(() => {
+  const eventFinancial = eventSponsors.value.filter((s: any) => sponsorCategory(s) === 'financial_event')
+  const globalFinancial = (allSponsors.value ?? []).filter((s: any) => sponsorCategory(s) === 'financial')
+
+  const merged = [
+    ...eventFinancial.map((s: any) => ({ ...s, isOfficial: false })),
+    ...globalFinancial.map((s: any) => ({ ...s, isOfficial: true })),
+  ]
+
+  const seen = new Set<string>()
+  return merged.filter((s: any) => {
+    const key = String(s.id ?? `${sponsorName(s)}::${sponsorWebsite(s) ?? ''}`).toLowerCase()
+    if (seen.has(key)) return false
+    seen.add(key)
+    return true
+  })
 })
 
 const googleMapsEmbedUrl = computed<string | null>(() => {
@@ -535,6 +583,10 @@ function sponsorLogo(sponsor: { logoUrl?: string; logo?: string; image?: string 
 
 function sponsorWebsite(sponsor: { websiteUrl?: string; url?: string }) {
   return sponsor?.websiteUrl ?? sponsor?.url ?? null
+}
+
+function sponsorName(sponsor: { name?: string; companyName?: string }) {
+  return sponsor?.name ?? sponsor?.companyName ?? ''
 }
 
 useHead({

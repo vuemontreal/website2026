@@ -29,6 +29,18 @@
             class="sm:hidden"
             @click="mobileMenuOpen = true"
           />
+          <UButton
+            as="a"
+            href="https://www.linkedin.com/company/vue-montreal/"
+            variant="solid"
+            color="primary"
+            size="md"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="rounded shadow-lg"
+          >
+            {{ $t('nav.join') }}
+          </UButton>
           <ClientOnly>
             <UDropdownMenu :items="localeItems">
               <UButton variant="ghost" color="neutral" size="sm" trailing-icon="i-heroicons-chevron-down" class="max-w-36 truncate sm:max-w-none">
@@ -227,6 +239,7 @@ function onNewsletterSubmit(e: Event) {
 
 const navItems = [
   { to: '/', label: 'nav.home' },
+  { to: '/about', label: 'nav.about' },
   { to: '/events', label: 'nav.events' },
   { to: '/sponsors', label: 'nav.sponsors' },
   { to: '/contact', label: 'nav.contact' },
