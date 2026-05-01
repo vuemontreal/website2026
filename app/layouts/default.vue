@@ -3,7 +3,7 @@
     <!-- Header -->
     <header class="sticky top-0 z-50 border-b border-gray-200/60 bg-white/80 backdrop-blur-xl dark:border-gray-800/60 dark:bg-gray-950/80">
       <div class="mx-auto flex h-16 max-w-7xl min-w-0 items-center justify-between gap-2 px-3 sm:gap-3 sm:px-6 lg:px-8">
-        <NuxtLink to="/" class="flex min-w-0 shrink-0 items-center gap-2 text-xl font-bold text-primary transition hover:text-primary-600 dark:hover:text-primary-400">
+        <NuxtLink :to="localePath('/')" class="flex min-w-0 shrink-0 items-center gap-2 text-xl font-bold text-primary transition hover:text-primary-600 dark:hover:text-primary-400">
           <NuxtImg
             src="logo.webp"
             :alt="$t('site.name')"
@@ -18,7 +18,7 @@
           <NuxtLink
             v-for="item in navItems"
             :key="item.to"
-            :to="item.to"
+            :to="localePath(item.to)"
             class="rounded-md px-3 py-2 text-sm font-medium text-gray-600 transition hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-gray-100"
           >
             {{ $t(item.label) }}
@@ -66,7 +66,7 @@
           <NuxtLink
             v-for="item in navItems"
             :key="item.to"
-            :to="item.to"
+            :to="localePath(item.to)"
             class="rounded-lg px-4 py-3 text-base font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-800"
             @click="mobileMenuOpen = false"
           >
@@ -87,7 +87,7 @@
         <div class="grid gap-10 lg:grid-cols-4 lg:gap-8">
           <!-- Brand -->
           <div>
-            <NuxtLink to="/" class="text-lg font-bold text-primary">
+            <NuxtLink :to="localePath('/')" class="text-lg font-bold text-primary">
               {{ $t('site.name') }}
             </NuxtLink>
             <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
@@ -101,7 +101,7 @@
               {{ $t('footer.quickLinks') }}
             </h4>
             <ul class="mt-4 space-y-2">
-              <li><NuxtLink to="/events" class="text-sm text-gray-600 hover:text-primary dark:text-gray-400">{{ $t('nav.events') }}</NuxtLink></li>
+              <li><NuxtLink :to="localePath('/events')" class="text-sm text-gray-600 hover:text-primary dark:text-gray-400">{{ $t('nav.events') }}</NuxtLink></li>
               <li>
                 <a
                   href="https://guild.host/vue-montreal"
@@ -112,8 +112,8 @@
                   {{ $t('footer.guildCommunity') }}
                 </a>
               </li>
-              <li><NuxtLink to="/sponsors" class="text-sm text-gray-600 hover:text-primary dark:text-gray-400">{{ $t('nav.sponsors') }}</NuxtLink></li>
-              <li><NuxtLink to="/contact" class="text-sm text-gray-600 hover:text-primary dark:text-gray-400">{{ $t('nav.contact') }}</NuxtLink></li>
+              <li><NuxtLink :to="localePath('/sponsors')" class="text-sm text-gray-600 hover:text-primary dark:text-gray-400">{{ $t('nav.sponsors') }}</NuxtLink></li>
+              <li><NuxtLink :to="localePath('/contact')" class="text-sm text-gray-600 hover:text-primary dark:text-gray-400">{{ $t('nav.contact') }}</NuxtLink></li>
             </ul>
           </div>
 
@@ -129,17 +129,17 @@
                 </a>
               </li>
               <li>
-                <NuxtLink to="/contact#sponsoring" class="text-sm text-gray-600 hover:text-primary dark:text-gray-400">
+                <NuxtLink :to="localePath('/contact#sponsoring')" class="text-sm text-gray-600 hover:text-primary dark:text-gray-400">
                   {{ $t('contact.sponsoring') }}
                 </NuxtLink>
               </li>
               <li>
-                <NuxtLink to="/contact#speaker" class="text-sm text-gray-600 hover:text-primary dark:text-gray-400">
+                <NuxtLink :to="localePath('/contact#speaker')" class="text-sm text-gray-600 hover:text-primary dark:text-gray-400">
                   {{ $t('contact.proposeSpeaker') }}
                 </NuxtLink>
               </li>
               <li>
-                <NuxtLink to="/contact#host" class="text-sm text-gray-600 hover:text-primary dark:text-gray-400">
+                <NuxtLink :to="localePath('/contact#host')" class="text-sm text-gray-600 hover:text-primary dark:text-gray-400">
                   {{ $t('contact.proposeHost') }}
                 </NuxtLink>
               </li>
@@ -236,6 +236,7 @@
 const mobileMenuOpen = ref(false)
 const newsletterEmail = ref('')
 const { locale, locales, setLocale } = useI18n()
+const localePath = useLocalePath()
 const siteConfig = useSiteConfig()
 
 function onNewsletterSubmit(e: Event) {

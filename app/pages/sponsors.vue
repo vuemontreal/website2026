@@ -8,7 +8,7 @@
         {{ $t('home.sponsorsDesc') }}
       </p>
       <NuxtLink
-        to="/contact#sponsoring"
+        :to="localePath('/contact#sponsoring')"
         class="mt-8 inline-flex w-full max-w-sm items-center justify-center gap-2 rounded-xl bg-primary px-6 py-3.5 text-sm font-semibold text-white shadow-lg transition hover:shadow-xl sm:w-auto sm:max-w-none sm:px-8 sm:py-4 sm:text-base sm:hover:scale-105"
       >
         {{ $t('home.becomeSponsor') }}
@@ -101,7 +101,7 @@
           {{ $t('home.noSponsors') }}
         </p>
         <NuxtLink
-          to="/contact#sponsoring"
+          :to="localePath('/contact#sponsoring')"
           class="mt-6 inline-block font-semibold text-primary hover:underline"
         >
           {{ $t('home.becomeSponsor') }} →
@@ -140,7 +140,7 @@
         </div>
       </div>
       <NuxtLink
-        to="/contact#sponsoring"
+        :to="localePath('/contact#sponsoring')"
         class="mt-8 inline-flex font-semibold text-primary hover:underline"
       >
         {{ $t('contact.sponsoringCta') }} →
@@ -153,6 +153,7 @@
 definePageMeta({ ssr: true })
 
 const { locale, t } = useI18n()
+const localePath = useLocalePath()
 const siteConfig = useSiteConfig()
 
 usePageSeo({
