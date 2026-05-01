@@ -417,7 +417,6 @@ const { data: rawEvents, pending } = await useFetch<any[]>('/api/public/events',
   getCachedData: (key) => useNuxtData(key).data.value,
   default: () => [],
 })
-
 const meetupsCount = computed(() => (rawEvents.value ?? []).length)
 
 const events = computed(() => {

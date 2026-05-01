@@ -11,15 +11,14 @@ export default defineCachedEventHandler(async (event) => {
 
   const data = await fetchThemeethub<any>(`/api/public/sponsors/${id}`, {
     ...(locale ? { query: { locale } } : {}),
-    cache: 'force-cache',
-    timeoutMs: 1000,
-    cacheMaxAgeSec: 300,
+    timeoutMs: 2500,
+    cacheMaxAgeSec: 120,
     fallback: null,
   })
   if (!data) throw createError({ statusCode: 404, message: 'Sponsor non trouvé' })
   return data
 }, {
-  maxAge: 300,
+  maxAge: 120,
   swr: true,
   getKey: (event) => {
     const id = getRouterParam(event, 'id') || 'unknown'

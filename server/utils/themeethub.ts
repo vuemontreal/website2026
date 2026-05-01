@@ -35,6 +35,7 @@ export async function fetchThemeethub<T>(
 ): Promise<T> {
   const url = getThemeethubUrl(path)
   const { fallback, query, cache, timeoutMs, cacheMaxAgeSec } = options ?? {}
+  const requestStartedAt = Date.now()
   const cacheTtlMs = (cacheMaxAgeSec ?? 0) * 1000
   const cacheKey = cacheTtlMs > 0
     ? `themeethub:${url}?${getQueryCacheSegment(query)}`
@@ -52,7 +53,7 @@ export async function fetchThemeethub<T>(
     const data = await $fetch<T>(url, {
       query,
       cache,
-      timeout: timeoutMs ?? 350,
+      timeout: timeoutMs ?? 2500,
       credentials: 'omit',
     })
     if (cacheKey) {
@@ -64,14 +65,29 @@ export async function fetchThemeethub<T>(
     }
     return data
   } catch (e) {
+    const elapsedMs = Date.now() - requestStartedAt
+    console.error('[themeethub] request failed', {
+      url,
+      query,
+      timeoutMs: timeoutMs ?? 2500,
+      elapsedMs,
+      error: e instanceof Error ? e.message : String(e),
+    })
+
     // Si le hub est indisponible et qu'on a une valeur expirée en cache, on renvoie quand meme
     // cette valeur stale pour proteger le SSR.
     if (cacheKey) {
       const storage = useStorage('cache')
       const cached = await storage.getItem<ThemeethubCacheEntry<T>>(cacheKey)
-      if (cached) return cached.data
+      if (cached) {
+        console.warn('[themeethub] serving stale cache after upstream failure', { url, query })
+        return cached.data
+      }
     }
-    if (fallback !== undefined) return fallback
+    if (fallback !== undefined) {
+      console.warn('[themeethub] serving explicit fallback after upstream failure', { url, query })
+      return fallback
+    }
     throw e
   }
 }

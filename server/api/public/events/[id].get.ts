@@ -13,9 +13,8 @@ export default defineCachedEventHandler(async (event) => {
 
   const data = await fetchThemeethub<any>(`/api/public/events/${id}`, {
     ...(hubQuery ? { query: hubQuery } : {}),
-    cache: 'force-cache',
-    timeoutMs: 1200,
-    cacheMaxAgeSec: 300,
+    timeoutMs: 2500,
+    cacheMaxAgeSec: 120,
     fallback: null,
   })
   if (!data) throw createError({ statusCode: 404, message: 'Événement non trouvé' })
@@ -27,18 +26,16 @@ export default defineCachedEventHandler(async (event) => {
     Promise.all(speakerIds.map((sid: string) =>
       fetchThemeethub<any>(`/api/public/speakers/${sid}`, {
         ...(hubQuery ? { query: hubQuery } : {}),
-        cache: 'force-cache',
-        timeoutMs: 1000,
-        cacheMaxAgeSec: 300,
+        timeoutMs: 2500,
+        cacheMaxAgeSec: 120,
         fallback: null,
       }),
     )).then((list) => list.filter(Boolean)),
     Promise.all(sponsorIds.map((sid: string) =>
       fetchThemeethub<any>(`/api/public/sponsors/${sid}`, {
         ...(hubQuery ? { query: hubQuery } : {}),
-        cache: 'force-cache',
-        timeoutMs: 1000,
-        cacheMaxAgeSec: 300,
+        timeoutMs: 2500,
+        cacheMaxAgeSec: 120,
         fallback: null,
       }),
     )).then((list) => list.filter(Boolean)),
@@ -53,7 +50,7 @@ export default defineCachedEventHandler(async (event) => {
     })),
   }
 }, {
-  maxAge: 300,
+  maxAge: 120,
   swr: true,
   getKey: (event) => {
     const id = getRouterParam(event, 'id') || 'unknown'
