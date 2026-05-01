@@ -8,12 +8,11 @@ export default defineCachedEventHandler(async (event) => {
 
   return fetchThemeethub<any[]>('/api/public/speakers', {
     ...(locale ? { query: { locale } } : {}),
-    cache: 'force-cache',
-    cacheMaxAgeSec: 300,
-    fallback: [],
+    timeoutMs: 2500,
+    cacheMaxAgeSec: 120,
   })
 }, {
-  maxAge: 300,
+  maxAge: 120,
   swr: true,
   getKey: (event) => {
     const query = getQuery(event)
