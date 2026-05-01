@@ -23,7 +23,7 @@
           <NuxtLink
             v-for="event in upcomingEvents"
             :key="event.id"
-            :to="`/events/${event.id}`"
+            :to="localePath(`/events/${event.id}`)"
             class="group block overflow-hidden rounded-2xl border border-gray-200/80 bg-white shadow-sm transition hover:shadow-lg dark:border-gray-800 dark:bg-gray-900/50"
           >
             <div class="relative aspect-video w-full overflow-hidden bg-gray-100 dark:bg-gray-800">
@@ -68,7 +68,7 @@
               {{ $t('events.joinGuildCta') }}
             </a>
             <NuxtLink
-              to="/contact#speaker"
+              :to="localePath('/contact#speaker')"
               class="inline-flex items-center rounded-xl border-2 border-gray-200 bg-white/0 px-5 py-3 font-semibold text-gray-700 transition hover:border-green-600 hover:text-green-600 dark:border-gray-700 dark:text-gray-200 dark:hover:border-green-500 dark:hover:text-green-500"
             >
               {{ $t('contact.proposeSpeaker') }} →
@@ -86,7 +86,7 @@
           <NuxtLink
             v-for="event in pastEvents"
             :key="event.id"
-            :to="`/events/${event.id}`"
+            :to="localePath(`/events/${event.id}`)"
             class="group block overflow-hidden rounded-2xl border border-gray-200/80 bg-white shadow-sm transition hover:shadow-lg dark:border-gray-800 dark:bg-gray-900/50"
           >
             <div class="relative aspect-video w-full overflow-hidden bg-gray-100 dark:bg-gray-800">
@@ -127,6 +127,7 @@
 definePageMeta({ ssr: true })
 
 const { locale, t } = useI18n()
+const localePath = useLocalePath()
 const siteConfig = useSiteConfig()
 
 usePageSeo({

@@ -26,14 +26,14 @@
           <div class="mt-10 w-full min-w-0">
             <div class="flex w-full min-w-0 flex-col gap-3 sm:flex-row sm:gap-4">
               <NuxtLink
-                to="/events"
+                :to="localePath('/events')"
                 class="inline-flex min-h-11 flex-2 items-center justify-center gap-2 rounded-xl bg-primary px-5 py-3.5 text-center text-sm font-semibold text-white shadow-lg transition hover:opacity-90 sm:min-h-0 sm:px-6 sm:text-base"
               >
                 {{ $t('home.upcomingEvents') }}
                 <UIcon name="i-heroicons-arrow-right" class="size-5 shrink-0" />
               </NuxtLink>
               <NuxtLink
-                to="/contact"
+                :to="localePath('/contact')"
                 class="inline-flex min-h-11 flex-1 items-center justify-center rounded-xl border-2 border-gray-200 px-5 py-3.5 text-center text-sm font-semibold text-gray-700 transition hover:border-primary hover:text-primary dark:border-gray-700 dark:text-gray-200 dark:hover:border-primary dark:hover:text-primary sm:min-h-0 sm:px-6 sm:text-base"
               >
                 {{ $t('nav.contact') }}
@@ -165,7 +165,7 @@
           </li>
         </ul>
         <NuxtLink
-          to="/events"
+          :to="localePath('/events')"
           class="mt-8 inline-flex items-center gap-2 font-semibold text-primary hover:underline"
         >
           {{ $t('home.communityCta') }}
@@ -227,7 +227,7 @@
           </p>
         </div>
         <NuxtLink
-          to="/events"
+          :to="localePath('/events')"
           class="flex shrink-0 items-center gap-2 self-start font-semibold text-primary transition hover:gap-3 sm:self-auto"
         >
           {{ $t('home.seeAllEvents') }}
@@ -241,7 +241,7 @@
         <NuxtLink
           v-for="event in events"
           :key="event.id"
-          :to="`/events/${event.id}`"
+          :to="localePath(`/events/${event.id}`)"
           class="group block overflow-hidden rounded-2xl border border-gray-200/80 bg-white shadow-sm transition hover:shadow-lg dark:border-gray-800 dark:bg-gray-900/50"
         >
           <div class="relative aspect-video w-full overflow-hidden bg-gray-100 dark:bg-gray-800">
@@ -286,7 +286,7 @@
             {{ $t('events.joinGuildCta') }}
           </a>
           <NuxtLink
-            to="/contact#speaker"
+            :to="localePath('/contact#speaker')"
             class="inline-flex items-center rounded-xl border-2 border-gray-200 bg-white/0 px-5 py-3 font-semibold text-gray-700 transition hover:border-green-600 hover:text-green-600 dark:border-gray-700 dark:text-gray-200 dark:hover:border-green-500 dark:hover:text-green-500"
           >
             {{ $t('contact.proposeSpeaker') }} →
@@ -342,7 +342,7 @@
           </p>
         </div>
         <NuxtLink
-          to="/contact#sponsoring"
+          :to="localePath('/contact#sponsoring')"
           class="inline-flex w-full items-center justify-center rounded-xl bg-primary px-6 py-3 text-center font-semibold text-white shadow-lg transition hover:opacity-90 sm:w-auto"
         >
           {{ $t('home.becomeSponsor') }}
@@ -383,6 +383,7 @@ definePageMeta({
 
 const siteConfig = useSiteConfig()
 const { locale, t } = useI18n()
+const localePath = useLocalePath()
 const newsletterEmail = ref('')
 
 usePageSeo({

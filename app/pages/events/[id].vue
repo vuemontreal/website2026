@@ -32,7 +32,7 @@
                 variant="ghost"
                 color="neutral"
                 icon="i-heroicons-arrow-left"
-                :to="'/events'"
+                :to="localePath('/events')"
                 class="-ml-2 max-w-full text-white hover:bg-white/10 hover:text-white"
               >
                 <span class="truncate">{{ $t('nav.events') }}</span>
@@ -306,7 +306,7 @@
       <p class="mt-4 text-gray-500 dark:text-gray-400">
         {{ $t('events.noEvents') }}
       </p>
-      <NuxtLink to="/events" class="mt-6 inline-block rounded-xl bg-primary px-6 py-3 font-semibold text-white transition hover:opacity-90">
+      <NuxtLink :to="localePath('/events')" class="mt-6 inline-block rounded-xl bg-primary px-6 py-3 font-semibold text-white transition hover:opacity-90">
         {{ $t('nav.events') }}
       </NuxtLink>
     </div>
@@ -318,6 +318,7 @@ definePageMeta({ ssr: true })
 
 const route = useRoute()
 const { locale, t } = useI18n()
+const localePath = useLocalePath()
 const { toSanitizedRichHtml, toPlainTextExcerpt } = useRichText()
 const siteConfig = useSiteConfig()
 
