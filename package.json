@@ -15,7 +15,7 @@
     "@nuxtjs/i18n": "^9",
     "@tailwindcss/typography": "^0.5.19",
     "marked": "^17.0.5",
-    "nuxt": "^4",
+    "nuxt": "^4.4.4",
     "sanitize-html": "^2.17.2",
     "vue": "latest"
   },
