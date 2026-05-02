@@ -5,6 +5,19 @@
 
 import { isUpstreamNotFound } from '../../../utils/themeethub'
 
+function normalizePublicEventDetail(raw: unknown): Record<string, unknown> | null {
+  if (raw == null) return null
+  if (typeof raw === 'object' && !Array.isArray(raw)) {
+    const o = raw as Record<string, unknown>
+    if (o.event && typeof o.event === 'object' && !Array.isArray(o.event))
+      return o.event as Record<string, unknown>
+    if (o.data && typeof o.data === 'object' && !Array.isArray(o.data))
+      return o.data as Record<string, unknown>
+    return o
+  }
+  return null
+}
+
 export default defineCachedEventHandler(async (event) => {
   const id = getRouterParam(event, 'id')
   if (!id) throw createError({ statusCode: 400, message: 'ID manquant' })
@@ -30,7 +43,9 @@ export default defineCachedEventHandler(async (event) => {
     })
   }
 
-  if (!data) throw createError({ statusCode: 404, message: 'Événement non trouvé' })
+  const normalized = normalizePublicEventDetail(data)
+  if (!normalized) throw createError({ statusCode: 404, message: 'Événement non trouvé' })
+  data = normalized
 
   const speakerIds = Array.isArray(data.speakers) ? data.speakers.filter((s: unknown) => typeof s === 'string') : []
   const sponsorIds = Array.isArray(data.sponsors) ? data.sponsors.filter((s: unknown) => typeof s === 'string') : []
