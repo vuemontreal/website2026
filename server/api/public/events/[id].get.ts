@@ -3,6 +3,8 @@
  * Enrichit la réponse en remplaçant les IDs speakers/sponsors par les objets complets (routes publiques hub).
  */
 
+import { isUpstreamNotFound } from '../../../utils/themeethub'
+
 export default defineCachedEventHandler(async (event) => {
   const id = getRouterParam(event, 'id')
   if (!id) throw createError({ statusCode: 400, message: 'ID manquant' })
@@ -11,12 +13,23 @@ export default defineCachedEventHandler(async (event) => {
   const locale = typeof query.locale === 'string' ? query.locale : undefined
   const hubQuery = locale ? { locale } : undefined
 
-  const data = await fetchThemeethub<any>(`/api/public/events/${id}`, {
-    ...(hubQuery ? { query: hubQuery } : {}),
-    timeoutMs: 2500,
-    cacheMaxAgeSec: 120,
-    fallback: null,
-  })
+  let data: any
+  try {
+    // Pas de fallback: un timeout ne doit pas être confondu avec un 404 (contenu pourtant en base).
+    data = await fetchThemeethub<any>(`/api/public/events/${id}`, {
+      ...(hubQuery ? { query: hubQuery } : {}),
+      cacheMaxAgeSec: 120,
+    })
+  } catch (e) {
+    if (isUpstreamNotFound(e)) {
+      throw createError({ statusCode: 404, message: 'Événement non trouvé' })
+    }
+    throw createError({
+      statusCode: 503,
+      message: 'TheMeetHub est temporairement indisponible. Réessaie dans un instant.',
+    })
+  }
+
   if (!data) throw createError({ statusCode: 404, message: 'Événement non trouvé' })
 
   const speakerIds = Array.isArray(data.speakers) ? data.speakers.filter((s: unknown) => typeof s === 'string') : []
@@ -26,7 +39,6 @@ export default defineCachedEventHandler(async (event) => {
     Promise.all(speakerIds.map((sid: string) =>
       fetchThemeethub<any>(`/api/public/speakers/${sid}`, {
         ...(hubQuery ? { query: hubQuery } : {}),
-        timeoutMs: 2500,
         cacheMaxAgeSec: 120,
         fallback: null,
       }),
@@ -34,7 +46,6 @@ export default defineCachedEventHandler(async (event) => {
     Promise.all(sponsorIds.map((sid: string) =>
       fetchThemeethub<any>(`/api/public/sponsors/${sid}`, {
         ...(hubQuery ? { query: hubQuery } : {}),
-        timeoutMs: 2500,
         cacheMaxAgeSec: 120,
         fallback: null,
       }),

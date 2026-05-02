@@ -41,6 +41,19 @@ export default defineNuxtConfig({
     port: 3001, // 3000 utilisé par TheMeetHub
   },
   runtimeConfig: {
+    /**
+     * Timeout (ms) pour les appels serveur → TheMeetHub.
+     * 2,5 s était trop court en prod (latence / cold start) et provoquait des faux « non trouvé ».
+     * Surcharge : NUXT_THEMEETHUB_FETCH_TIMEOUT_MS (ex. 12000).
+     */
+    themeethubFetchTimeoutMs: (() => {
+      const raw = process.env.NUXT_THEMEETHUB_FETCH_TIMEOUT_MS
+      if (raw !== undefined && raw !== '') {
+        const n = Number(raw)
+        if (Number.isFinite(n) && n >= 1000) return n
+      }
+      return 8000
+    })(),
     public: {
       // En dev, le site tourne sur 3001 (voir devServer) et le hub sur 3000.
       themeethubApiUrl: process.env.NUXT_THEMEETHUB_API_URL || 'http://localhost:3000',
