@@ -1,13 +1,13 @@
 diff --git a/node_modules/@vitejs/plugin-vue/dist/index.mjs b/node_modules/@vitejs/plugin-vue/dist/index.mjs
-index 89414ef..3e0c4b7 100644
+index 6886d94..29a83b5 100644
 --- a/node_modules/@vitejs/plugin-vue/dist/index.mjs
 +++ b/node_modules/@vitejs/plugin-vue/dist/index.mjs
-@@ -112,7 +112,7 @@ function setSrcDescriptor(filename, entry, scoped) {
+@@ -108,7 +108,7 @@ function setSrcDescriptor(filename, entry, scoped) {
  	cache.set(filename, entry);
  }
  function getHash(text) {
 -	return crypto.hash("sha256", text, "hex").substring(0, 8);
 +	return crypto.createHash("sha256").update(text).digest("hex").substring(0, 8);
  }
- 
  //#endregion
+ //#region ../../node_modules/.pnpm/slash@5.1.0/node_modules/slash/index.js
