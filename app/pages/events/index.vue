@@ -41,8 +41,8 @@
               <h3 class="break-words text-lg font-bold text-gray-900 transition group-hover:text-primary dark:text-gray-100">
                 {{ event.title }}
               </h3>
-              <p v-if="event.date" class="mt-2 text-sm font-medium text-primary">
-                {{ formatDate(event.date) }}
+              <p v-if="getEventCalendarDateString(event)" class="mt-2 text-sm font-medium text-primary">
+                {{ formatDate(getEventCalendarDateString(event)!) }}
               </p>
               <p v-if="event.description" class="mt-4 line-clamp-2 text-gray-600 dark:text-gray-400">
                 {{ event.description }}
@@ -104,8 +104,8 @@
               <h3 class="break-words text-lg font-bold text-gray-900 transition group-hover:text-primary dark:text-gray-100">
                 {{ event.title }}
               </h3>
-              <p v-if="event.date" class="mt-2 text-sm font-medium text-primary">
-                {{ formatDate(event.date) }}
+              <p v-if="getEventCalendarDateString(event)" class="mt-2 text-sm font-medium text-primary">
+                {{ formatDate(getEventCalendarDateString(event)!) }}
               </p>
               <p v-if="event.description" class="mt-4 line-clamp-2 text-gray-600 dark:text-gray-400">
                 {{ event.description }}
@@ -124,6 +124,8 @@
 </template>
 
 <script setup lang="ts">
+import { getEventCalendarDateString } from '~/utils/eventDate'
+
 definePageMeta({ ssr: true })
 
 const { locale, t } = useI18n()
@@ -161,26 +163,34 @@ const upcomingEvents = computed(() => {
   const list = rawEvents.value ?? []
   return list
     .filter((e) => {
-      const d = e?.date
+      const d = getEventCalendarDateString(e as Record<string, unknown>)
       if (!d) return false
       const eventDate = new Date(d)
       eventDate.setHours(0, 0, 0, 0)
       return eventDate >= today
     })
-    .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
+    .sort((a, b) => {
+      const da = getEventCalendarDateString(a as Record<string, unknown>)
+      const db = getEventCalendarDateString(b as Record<string, unknown>)
+      return new Date(da!).getTime() - new Date(db!).getTime()
+    })
 })
 
 const pastEvents = computed(() => {
   const list = rawEvents.value ?? []
   return list
     .filter((e) => {
-      const d = e?.date
+      const d = getEventCalendarDateString(e as Record<string, unknown>)
       if (!d) return false
       const eventDate = new Date(d)
       eventDate.setHours(0, 0, 0, 0)
       return eventDate < today
     })
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    .sort((a, b) => {
+      const da = getEventCalendarDateString(a as Record<string, unknown>)
+      const db = getEventCalendarDateString(b as Record<string, unknown>)
+      return new Date(db!).getTime() - new Date(da!).getTime()
+    })
 })
 
 const { getEventBannerUrl } = useEventImage()

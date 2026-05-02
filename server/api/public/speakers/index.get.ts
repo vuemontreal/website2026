@@ -8,7 +8,6 @@ export default defineCachedEventHandler(async (event) => {
 
   return fetchThemeethub<any[]>('/api/public/speakers', {
     ...(locale ? { query: { locale } } : {}),
-    timeoutMs: 2500,
     cacheMaxAgeSec: 120,
   })
 }, {

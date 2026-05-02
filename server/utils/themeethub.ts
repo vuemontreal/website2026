@@ -20,6 +20,30 @@ function getQueryCacheSegment(query?: Record<string, string>) {
   return entries.map(([k, v]) => `${k}=${v}`).join('&')
 }
 
+/** Statut HTTP renvoyé par TheMeetHub dans une erreur $fetch/ofetch. */
+export function getUpstreamHttpStatus(e: unknown): number | undefined {
+  if (!e || typeof e !== 'object') return undefined
+  const o = e as Record<string, unknown>
+  if (typeof o.statusCode === 'number') return o.statusCode
+  if (typeof o.status === 'number') return o.status
+  const resp = o.response as { status?: number } | undefined
+  if (resp && typeof resp.status === 'number') return resp.status
+  return undefined
+}
+
+export function isUpstreamNotFound(e: unknown): boolean {
+  return getUpstreamHttpStatus(e) === 404
+}
+
+function defaultThemeethubTimeoutMs(): number {
+  try {
+    const n = Number(useRuntimeConfig().themeethubFetchTimeoutMs)
+    return Number.isFinite(n) && n >= 1000 ? n : 8000
+  } catch {
+    return 8000
+  }
+}
+
 export async function fetchThemeethub<T>(
   path: string,
   options?: {
@@ -35,6 +59,7 @@ export async function fetchThemeethub<T>(
 ): Promise<T> {
   const url = getThemeethubUrl(path)
   const { fallback, query, cache, timeoutMs, cacheMaxAgeSec } = options ?? {}
+  const resolvedTimeoutMs = timeoutMs ?? defaultThemeethubTimeoutMs()
   const requestStartedAt = Date.now()
   const cacheTtlMs = (cacheMaxAgeSec ?? 0) * 1000
   const cacheKey = cacheTtlMs > 0
@@ -53,7 +78,7 @@ export async function fetchThemeethub<T>(
     const data = await $fetch<T>(url, {
       query,
       cache,
-      timeout: timeoutMs ?? 2500,
+      timeout: resolvedTimeoutMs,
       credentials: 'omit',
     })
     if (cacheKey) {
@@ -69,7 +94,7 @@ export async function fetchThemeethub<T>(
     console.error('[themeethub] request failed', {
       url,
       query,
-      timeoutMs: timeoutMs ?? 2500,
+      timeoutMs: resolvedTimeoutMs,
       elapsedMs,
       error: e instanceof Error ? e.message : String(e),
     })

@@ -41,9 +41,9 @@
                 {{ event.title }}
               </h1>
               <div class="mt-3 flex flex-wrap gap-x-3 gap-y-2 text-xs text-white/90 sm:gap-4 sm:text-sm">
-                <span v-if="event.date" class="inline-flex items-center gap-1.5">
+                <span v-if="eventDateStr" class="inline-flex items-center gap-1.5">
                   <UIcon name="i-heroicons-calendar-days" class="size-4" />
-                  {{ formatDate(event.date) }}
+                  {{ formatDate(eventDateStr) }}
                 </span>
                 <span v-if="event.time" class="inline-flex items-center gap-1.5">
                   <UIcon name="i-heroicons-clock" class="size-4" />
@@ -226,13 +226,13 @@
                 {{ $t('event.details') }}
               </h3>
               <dl class="space-y-4">
-                <div v-if="event.date">
+                <div v-if="eventDateStr">
                   <dt class="flex items-center gap-2 text-sm font-medium text-gray-500 dark:text-gray-400">
                     <UIcon name="i-heroicons-calendar-days" class="size-4" />
                     {{ $t('event.date') }}
                   </dt>
                   <dd class="mt-1">
-                    {{ formatDate(event.date) }}
+                    {{ formatDate(eventDateStr) }}
                   </dd>
                 </div>
                 <div v-if="event.time">
@@ -314,6 +314,8 @@
 </template>
 
 <script setup lang="ts">
+import { getEventCalendarDateString } from '~/utils/eventDate'
+
 definePageMeta({ ssr: true })
 
 const route = useRoute()
@@ -331,6 +333,10 @@ const { data: event, pending } = await useFetch<any>(() => `/api/public/events/$
   getCachedData: (key) => useNuxtData(key).data.value,
   default: () => null,
 })
+
+const eventDateStr = computed(() =>
+  getEventCalendarDateString(event.value as Record<string, unknown> | null | undefined),
+)
 
 const { data: allSponsors } = await useFetch<any[]>('/api/public/sponsors', {
   key: computed(() => `event-global-sponsors-${locale.value}`),
@@ -371,10 +377,11 @@ const eventFormatKey = computed(() => {
 /** Aligné sur la liste événements : jour calendaire en timezone locale. */
 const isPastEvent = computed(() => {
   const e = event.value
-  if (!e?.date) return false
+  const d = getEventCalendarDateString(e as Record<string, unknown> | null | undefined)
+  if (!d) return false
   const today = new Date()
   today.setHours(0, 0, 0, 0)
-  const eventDate = new Date(e.date)
+  const eventDate = new Date(d)
   eventDate.setHours(0, 0, 0, 0)
   return eventDate < today
 })
@@ -605,7 +612,8 @@ usePageSeo({
 })
 
 if (import.meta.server && !event.value) {
-  setResponseStatus(useRequestEvent(), 404, 'Not Found')
+  const e = useRequestEvent()
+  if (e) setResponseStatus(e, 404, 'Not Found')
 }
 
 const eventCanonicalUrl = computed(() => `${siteConfig.siteUrl.replace(/\/+$/, '')}${route.path}`)
@@ -614,7 +622,8 @@ const eventJsonLd = computed(() => {
   const e = event.value
   if (!e) return null
 
-  const startDate = typeof e.date === 'string' && e.date ? new Date(e.date).toISOString() : undefined
+  const dateRaw = getEventCalendarDateString(e as Record<string, unknown>)
+  const startDate = dateRaw ? new Date(dateRaw).toISOString() : undefined
   const endDate = typeof e.endDate === 'string' && e.endDate ? new Date(e.endDate).toISOString() : undefined
 
   const mode = eventFormatKey.value

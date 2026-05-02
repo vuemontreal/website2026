@@ -259,8 +259,8 @@
             <h3 class="wrap-break-word text-lg font-bold text-gray-900 transition group-hover:text-primary dark:text-gray-100">
               {{ event.title }}
             </h3>
-            <p v-if="event.date" class="mt-2 text-sm font-medium text-primary">
-              {{ formatDate(event.date) }}
+            <p v-if="getEventCalendarDateString(event)" class="mt-2 text-sm font-medium text-primary">
+              {{ formatDate(getEventCalendarDateString(event)!) }}
             </p>
             <p v-if="event.description" class="mt-4 line-clamp-2 text-gray-600 dark:text-gray-400">
               {{ event.description }}
@@ -377,6 +377,8 @@
 </template>
 
 <script setup lang="ts">
+import { getEventCalendarDateString } from '~/utils/eventDate'
+
 definePageMeta({
   ssr: true,
 })
@@ -425,7 +427,7 @@ const events = computed(() => {
   const today = new Date()
   today.setHours(0, 0, 0, 0)
   return list.filter((e) => {
-    const d = e?.date
+    const d = getEventCalendarDateString(e as Record<string, unknown>)
     if (!d) return false
     const eventDate = new Date(d)
     eventDate.setHours(0, 0, 0, 0)

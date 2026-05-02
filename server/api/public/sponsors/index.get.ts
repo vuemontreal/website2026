@@ -8,7 +8,6 @@ export default defineCachedEventHandler(async (event) => {
 
   return fetchThemeethub<any[]>('/api/public/sponsors', {
     ...(locale ? { query: { locale } } : {}),
-    timeoutMs: 2500,
     cacheMaxAgeSec: 120,
   })
 }, {
