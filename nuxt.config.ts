@@ -54,9 +54,14 @@ export default defineNuxtConfig({
       }
       return 8000
     })(),
+    /**
+     * URL du hub — clé privée (serveur seulement).
+     * Surcharge runtime : NUXT_THEMEETHUB_API_URL (pas NUXT_PUBLIC_…).
+     * Ne pas mettre dans `public` : Nuxt n’applique alors que NUXT_PUBLIC_THEMEETHUB_API_URL,
+     * et le défaut localhost est figé en prod si .env n’est pas lu.
+     */
+    themeethubApiUrl: 'http://localhost:3000',
     public: {
-      // En dev, le site tourne sur 3001 (voir devServer) et le hub sur 3000.
-      themeethubApiUrl: process.env.NUXT_THEMEETHUB_API_URL || 'http://localhost:3000',
       siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://vuemontreal.ca',
       contactEmail: process.env.NUXT_CONTACT_EMAIL || 'contact@vuemontreal.org',
       /** Hero image (split layout). Ex: https://images.unsplash.com/photo-xxx */

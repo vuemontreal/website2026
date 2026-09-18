@@ -26,7 +26,7 @@ function xmlEscape(value: string) {
 export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig(event)
   const siteUrl = trimTrailingSlash(config.public.siteUrl || 'https://vuemontreal.ca')
-  const apiBaseUrl = trimTrailingSlash(config.public.themeethubApiUrl || '')
+  const apiBaseUrl = trimTrailingSlash(String(config.themeethubApiUrl || ''))
 
   const staticPaths = ['/', '/about', '/events', '/sponsors', '/contact']
   const urls = new Map<string, string>()

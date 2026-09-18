@@ -3,9 +3,28 @@
  * Toutes les requêtes partent du serveur Nuxt — pas de CORS.
  */
 
+function resolveRuntimeConfig() {
+  try {
+    return useRuntimeConfig(useEvent())
+  } catch {
+    return useRuntimeConfig()
+  }
+}
+
+function getThemeethubBaseUrl(): string {
+  const config = resolveRuntimeConfig()
+  const base = String(config.themeethubApiUrl || '').trim()
+  if (!base || (process.env.VERCEL && /localhost|127\.0\.0\.1/i.test(base))) {
+    console.error('[themeethub] URL hub invalide en prod. Définis NUXT_THEMEETHUB_API_URL sur Vercel (Production + Preview), puis redéploie.', {
+      themeethubApiUrl: base || '(vide)',
+      vercel: Boolean(process.env.VERCEL),
+    })
+  }
+  return base
+}
+
 export function getThemeethubUrl(path: string): string {
-  const config = useRuntimeConfig()
-  const base = config.public.themeethubApiUrl as string
+  const base = getThemeethubBaseUrl()
   return `${base.replace(/\/$/, '')}${path.startsWith('/') ? path : `/${path}`}`
 }
 
@@ -37,7 +56,7 @@ export function isUpstreamNotFound(e: unknown): boolean {
 
 function defaultThemeethubTimeoutMs(): number {
   try {
-    const n = Number(useRuntimeConfig().themeethubFetchTimeoutMs)
+    const n = Number(resolveRuntimeConfig().themeethubFetchTimeoutMs)
     return Number.isFinite(n) && n >= 1000 ? n : 8000
   } catch {
     return 8000
