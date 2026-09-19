@@ -63,7 +63,7 @@
               href="https://guild.host/vue-montreal"
               target="_blank"
               rel="noopener noreferrer"
-              class="inline-flex items-center rounded-xl bg-green-600 px-5 py-3 font-semibold text-white shadow-sm transition hover:bg-green-700"
+              class="inline-flex items-center rounded-xl bg-primary px-5 py-3 font-semibold text-inverted shadow-sm transition hover:opacity-90"
             >
               {{ $t('events.joinGuildCta') }}
             </a>

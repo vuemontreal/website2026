@@ -27,7 +27,7 @@
             <div class="flex w-full min-w-0 flex-col gap-3 sm:flex-row sm:gap-4">
               <NuxtLink
                 :to="localePath('/events')"
-                class="inline-flex min-h-11 flex-2 items-center justify-center gap-2 rounded-xl bg-primary px-5 py-3.5 text-center text-sm font-semibold text-white shadow-lg transition hover:opacity-90 sm:min-h-0 sm:px-6 sm:text-base"
+                class="inline-flex min-h-11 flex-2 items-center justify-center gap-2 rounded-xl bg-primary px-5 py-3.5 text-center text-sm font-semibold text-inverted shadow-lg transition hover:opacity-90 sm:min-h-0 sm:px-6 sm:text-base"
               >
                 {{ $t('home.upcomingEvents') }}
                 <UIcon name="i-heroicons-arrow-right" class="size-5 shrink-0" />
@@ -204,7 +204,7 @@
         </div>
 
         <div class="flex flex-col rounded-2xl border border-gray-200/80 bg-white/60 p-6 backdrop-blur dark:border-gray-800 dark:bg-gray-900/30">
-          <UIcon name="i-heroicons-computer-network" class="size-7 text-primary" />
+          <UIcon name="i-heroicons-globe-americas" class="size-7 text-primary" />
           <h3 class="mt-4 text-lg font-semibold text-gray-900 dark:text-gray-100">
             {{ $t('home.whyJoinCard3Title') }}
           </h3>
@@ -281,7 +281,7 @@
             href="https://guild.host/vue-montreal"
             target="_blank"
             rel="noopener noreferrer"
-            class="inline-flex items-center rounded-xl bg-green-600 px-5 py-3 font-semibold text-white shadow-sm transition hover:bg-green-700"
+            class="inline-flex items-center rounded-xl bg-primary px-5 py-3 font-semibold text-inverted shadow-sm transition hover:opacity-90"
           >
             {{ $t('events.joinGuildCta') }}
           </a>
@@ -296,7 +296,7 @@
     </section>
 
     <!-- Newsletter -->
-    <section class="rounded-3xl border border-gray-200/80 bg-primary/5 px-5 py-10 dark:border-gray-800 dark:bg-primary/10 sm:px-12 sm:py-16">
+    <section v-if="config.public.enableNewsletter === 'true'" class="rounded-3xl border border-gray-200/80 bg-primary/5 px-5 py-10 dark:border-gray-800 dark:bg-primary/10 sm:px-12 sm:py-16">
       <div class="mx-auto max-w-2xl text-center">
         <h2 class="text-2xl font-bold tracking-tight sm:text-3xl">
           {{ $t('footer.newsletter') }}
@@ -343,7 +343,7 @@
         </div>
         <NuxtLink
           :to="localePath('/contact#sponsoring')"
-          class="inline-flex w-full items-center justify-center rounded-xl bg-primary px-6 py-3 text-center font-semibold text-white shadow-lg transition hover:opacity-90 sm:w-auto"
+          class="inline-flex w-full items-center justify-center rounded-xl bg-primary px-6 py-3 text-center font-semibold text-inverted shadow-lg transition hover:opacity-90 sm:w-auto"
         >
           {{ $t('home.becomeSponsor') }}
         </NuxtLink>
@@ -383,6 +383,7 @@ definePageMeta({
   ssr: true,
 })
 
+const config = useRuntimeConfig()
 const siteConfig = useSiteConfig()
 const { locale, t } = useI18n()
 const localePath = useLocalePath()

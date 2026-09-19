@@ -27,14 +27,14 @@
 
         <div class="flex min-w-0 shrink-0 items-center gap-1 sm:gap-2">
           <ClientOnly>
-            <UColorModeSwitch class="max-sm:scale-90 sm:mr-1" />
+            <UColorModeSwitch v-if="config.public.enableColorMode === 'true'" class="max-sm:scale-90 sm:mr-1" />
           </ClientOnly>
           <UButton
             variant="ghost"
             color="neutral"
             icon="i-heroicons-bars-3"
             class="sm:hidden"
-            @click="mobileMenuOpen = true"
+            @click="() => mobileMenuOpen = true"
           />
           <UButton
             as="a"
@@ -68,7 +68,7 @@
             :key="item.to"
             :to="localePath(item.to)"
             class="rounded-lg px-4 py-3 text-base font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-800"
-            @click="mobileMenuOpen = false"
+            @click="() => mobileMenuOpen = false"
           >
             {{ $t(item.label) }}
           </NuxtLink>
@@ -147,7 +147,7 @@
           </div>
 
           <!-- Newsletter + Social -->
-          <div>
+          <div v-if="config.public.enableNewsletter === 'true'">
             <h4 class="text-sm font-semibold uppercase tracking-wider text-gray-900 dark:text-gray-100">
               {{ $t('footer.newsletter') }}
             </h4>
@@ -238,6 +238,7 @@ const newsletterEmail = ref('')
 const { locale, locales, setLocale } = useI18n()
 const localePath = useLocalePath()
 const siteConfig = useSiteConfig()
+const config = useRuntimeConfig()
 
 function onNewsletterSubmit(e: Event) {
   if (!siteConfig.newsletterUrl) {
