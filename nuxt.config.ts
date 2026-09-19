@@ -33,9 +33,10 @@ export default defineNuxtConfig({
     },
   },
   colorMode: {
-    preference: 'system',
+    preference: 'dark',
     fallback: 'dark',
     classSuffix: '',
+    storageKey: 'nuxt-color-mode-v2',
   },
   devServer: {
     port: 3001, // 3000 utilisé par TheMeetHub
@@ -76,6 +77,9 @@ export default defineNuxtConfig({
       newsletterUrl: process.env.NUXT_NEWSLETTER_URL || '',
       /** Champ email pour newsletter (Mailchimp=EMAIL, Formspree/Buttondown=email) */
       newsletterEmailField: process.env.NUXT_NEWSLETTER_EMAIL_FIELD || 'email',
+      /** Feature flags */
+      enableNewsletter: process.env.VITE_ENABLE_NEWSLETTER,
+      enableDarkMode: process.env.VITE_ENABLE_DARK_MODE,
     },
   },
   i18n: {

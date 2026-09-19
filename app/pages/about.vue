@@ -24,17 +24,13 @@
       <!-- Placeholder image -->
       <div class="relative flex items-center justify-center rounded-2xl border border-gray-200/80 bg-gray-50 p-6 dark:border-gray-800 dark:bg-gray-900/30">
         <div class="text-center">
-          <div
-            class="mx-auto flex size-20 items-center justify-center rounded-2xl bg-white shadow-sm ring-1 ring-gray-200 dark:bg-gray-950 dark:ring-gray-800"
-          >
-            <UIcon name="i-heroicons-photo" class="size-8 text-primary" />
-          </div>
-          <p class="mt-4 text-sm font-medium text-gray-700 dark:text-gray-200">
-            Image à venir
-          </p>
-          <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">
-            Placeholder (illustration)
-          </p>
+           <NuxtImg
+            src="logo.webp"
+            :alt="$t('site.name')"
+            width="593"
+            height="357"
+            class="w-auto object-contain"
+          />
         </div>
       </div>
     </section>

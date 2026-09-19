@@ -306,7 +306,7 @@
       <p class="mt-4 text-gray-500 dark:text-gray-400">
         {{ $t('events.noEvents') }}
       </p>
-      <NuxtLink :to="localePath('/events')" class="mt-6 inline-block rounded-xl bg-primary px-6 py-3 font-semibold text-white transition hover:opacity-90">
+      <NuxtLink :to="localePath('/events')" class="mt-6 inline-block rounded-xl bg-primary px-6 py-3 font-semibold text-inverted transition hover:opacity-90">
         {{ $t('nav.events') }}
       </NuxtLink>
     </div>

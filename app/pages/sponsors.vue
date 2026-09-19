@@ -9,7 +9,7 @@
       </p>
       <NuxtLink
         :to="localePath('/contact#sponsoring')"
-        class="mt-8 inline-flex w-full max-w-sm items-center justify-center gap-2 rounded-xl bg-primary px-6 py-3.5 text-sm font-semibold text-white shadow-lg transition hover:shadow-xl sm:w-auto sm:max-w-none sm:px-8 sm:py-4 sm:text-base sm:hover:scale-105"
+        class="mt-8 inline-flex w-full max-w-sm items-center justify-center gap-2 rounded-xl bg-primary px-6 py-3.5 text-sm font-semibold text-inverted shadow-lg transition hover:opacity-90 sm:w-auto sm:max-w-none sm:px-8 sm:py-4 sm:text-base"
       >
         {{ $t('home.becomeSponsor') }}
         <UIcon name="i-heroicons-arrow-right" class="size-5" />
