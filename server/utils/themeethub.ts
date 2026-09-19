@@ -101,8 +101,13 @@ export async function fetchThemeethub<T>(
       credentials: 'omit',
     })
     if (cacheKey) {
-      const storage = useStorage('cache')
-      await storage.setItem(cacheKey, {
+      // 1. Utilisez le namespace 'themeethub' ou 'memory'
+      const storage = useStorage('themeethub')
+
+      // 2. Évitez la collision fichier/dossier en forçant une extension .json
+      const safeCacheKey = cacheKey.replace(/\/?$/, '.json')
+
+      await storage.setItem(safeCacheKey, {
         expiresAt: Date.now() + cacheTtlMs,
         data,
       } satisfies ThemeethubCacheEntry<T>)

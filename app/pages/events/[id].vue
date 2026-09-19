@@ -185,12 +185,12 @@
                     :href="community.url"
                     target="_blank"
                     rel="noopener"
-                    class="inline-flex items-center gap-1.5 text-sm text-primary hover:underline"
+                    class="inline-flex items-center gap-1.5 text-2xl text-primary hover:underline"
                     :aria-label="community.name"
                   >
                     {{ community.name }}
                   </a>
-                  <span v-else class="inline-flex items-center gap-1.5 text-sm text-primary hover:underline">
+                  <span v-else class="inline-flex items-center gap-1.5 text-2xl text-primary hover:underline">
                     {{ community.name }}
                   </span>
                 </template>

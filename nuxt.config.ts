@@ -93,4 +93,12 @@ export default defineNuxtConfig({
     langDir: 'locales',
     bundle: { optimizeTranslationDirective: false },
   },
+  nitro: {
+    storage: {
+      themeethub: {
+        driver: process.env.NODE_ENV === 'development' ? 'memory' : 'fs',
+        base: './.nuxt/cache/themeethub'
+      }
+    }
+  }
 })
