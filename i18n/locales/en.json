@@ -127,7 +127,8 @@
     "officialSponsorLabel": "Official Vue Montreal partner",
     "replays": "Replays",
     "replaysYoutubeChannel": "Replays are available on our YouTube channel →",
-    "replayVideoTitleFallback": "Replay"
+    "replayVideoTitleFallback": "Replay",
+    "externalCommunities": "External communities"
   },
   "sponsors": {
     "title": "Our partners",

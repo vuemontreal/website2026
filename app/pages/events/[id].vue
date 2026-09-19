@@ -177,6 +177,22 @@
             <h2 class="mb-6 text-xl font-semibold">
               {{ $t('event.externalCommunities') }}
             </h2>
+            <div class="rounded-xl border border-gray-200/80 bg-gray-50/80 p-4 dark:border-gray-800 dark:bg-gray-800/30 sm:p-6 md:p-8">
+              <div class="flex flex-wrap items-center justify-center gap-4 sm:justify-start sm:gap-8">
+                <template v-for="(community, i) in externalCommunities" :key="i">
+                  <a
+                    v-if="community.websiteUrl"
+                    :href="community.websiteUrl"
+                    target="_blank"
+                    rel="noopener"
+                    class="inline-flex items-center gap-1.5 text-sm text-primary hover:underline"
+                    :aria-label="community.name"
+                  >
+                    {{ community.name }}
+                  </a>
+                </template>
+              </div>
+            </div>
           </section>
 
           <!-- Sponsors / Partenaires -->
