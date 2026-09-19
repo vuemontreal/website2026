@@ -96,8 +96,7 @@ export default defineNuxtConfig({
   nitro: {
     storage: {
       themeethub: {
-        driver: process.env.NODE_ENV === 'development' ? 'memory' : 'fs',
-        base: './.nuxt/cache/themeethub'
+        driver: 'memory'
       }
     }
   }
