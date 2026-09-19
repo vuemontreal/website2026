@@ -172,6 +172,34 @@
             </p>
           </section>
 
+          <!-- External Communities -->
+          <section v-if="displayExternalCommunities.length">
+            <h2 class="mb-6 text-xl font-semibold">
+              {{ $t('event.externalCommunities') }}
+            </h2>
+            <div class="flex flex-wrap items-center justify-center gap-6 rounded-xl border border-gray-200/80 bg-gray-50/80 p-4 dark:border-gray-800 dark:bg-gray-800/30 sm:justify-start sm:gap-8 sm:p-6 md:p-8">
+              <template v-for="(community, i) in displayExternalCommunities" :key="i">
+                <a
+                  v-if="communityWebsite(community)"
+                  :href="communityWebsite(community)!"
+                  target="_blank"
+                  rel="noopener"
+                  class="flex flex-col items-center gap-2 p-2 transition hover:opacity-80"
+                >
+                  <UAvatar
+                    :src="community.logo || community.image"
+                    :alt="community.name"
+                    size="lg"
+                    class="shrink-0"
+                  />
+                  <span class="text-center text-sm font-medium">
+                    {{ community.name }}
+                  </span>
+                </a>
+              </template>
+            </div>
+          </section>
+
           <!-- Sponsors / Partenaires -->
           <section v-if="displaySponsors.length">
             <h2 class="mb-6 text-xl font-semibold">
@@ -368,6 +396,36 @@ function getEventFormatRaw(e: Record<string, unknown> | null | undefined): strin
   }
   return null
 }
+
+const { data: allExternalCommunities } = await useFetch<any[]>('/api/public/external-communities', {
+  key: computed(() => `event-global-external-communities-${locale.value}`),
+  query: computed(() => ({ locale: locale.value })),
+  getCachedData: (key) => useNuxtData(key).data.value,
+  default: () => [],
+})
+
+function communityWebsite(community: { website?: string; websiteUrl?: string }) {
+  return (
+    community.websiteUrl ??
+    community.website ??
+    (typeof community.website === 'string' && community.website.trim()
+      ? community.website
+      : null)
+  )
+}
+
+const displayExternalCommunities = computed(() => {
+  const ids = event.value?.externalCommunities ?? event.value?.external_communities ?? []
+  const communityIds = Array.isArray(ids)
+    ? ids.map((i) => (typeof i === 'string' ? i.trim() : null)).filter(Boolean)
+    : []
+  if (!communityIds.length || !allExternalCommunities.value) return []
+
+  return allExternalCommunities.value.filter((c) =>
+    communityIds.some((id) => String(c.id) === id),
+  )
+})
+
 
 const eventFormatKey = computed(() => {
   const raw = getEventFormatRaw(event.value)
