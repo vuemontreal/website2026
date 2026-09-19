@@ -141,8 +141,8 @@
     "seeWebsiteArrow": "Voir le site →",
     "noCommunitySponsors": "Aucun partenaire communautaire pour le moment.",
     "tierAudience": {
-      "platinum": "Accès à +1 000 développeurs Vue/Nuxt",
-      "gold": "Accès à +1 000 développeurs Vue/Nuxt",
+      "platinum": "Accès aux développeurs Vue/Nuxt",
+      "gold": "Accès aux développeurs Vue/Nuxt",
       "silver": "Logo sur le site et les communications communautaires",
       "bronze": "Logo sur la page partenaires"
     },

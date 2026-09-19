@@ -141,8 +141,8 @@
     "seeWebsiteArrow": "Visit website →",
     "noCommunitySponsors": "No community partners yet.",
     "tierAudience": {
-      "platinum": "Reach 1,000+ Vue/Nuxt developers",
-      "gold": "Reach 1,000+ Vue/Nuxt developers",
+      "platinum": "Reach Vue/Nuxt developers",
+      "gold": "Reach Vue/Nuxt developers",
       "silver": "Logo on the site and community communications",
       "bronze": "Logo on the partners page"
     },
