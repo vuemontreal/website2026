@@ -181,8 +181,8 @@
               <div class="flex flex-wrap items-center justify-center gap-4 sm:justify-start sm:gap-8">
                 <template v-for="(community, i) in externalCommunities" :key="i">
                   <a
-                    v-if="community.websiteUrl"
-                    :href="community.websiteUrl"
+                    v-if="community.url"
+                    :href="community.url"
                     target="_blank"
                     rel="noopener"
                     class="inline-flex items-center gap-1.5 text-sm text-primary hover:underline"
@@ -190,6 +190,9 @@
                   >
                     {{ community.name }}
                   </a>
+                  <span v-else class="inline-flex items-center gap-1.5 text-sm text-primary hover:underline">
+                    {{ community.name }}
+                  </span>
                 </template>
               </div>
             </div>
