@@ -376,35 +376,6 @@ function getEventFormatRaw(e: Record<string, unknown> | null | undefined): strin
   return null
 }
 
-// const { data: allExternalCommunities } = await useFetch<any[]>('/api/public/external-communities', {
-//   key: computed(() => `event-global-external-communities-${locale.value}`),
-//   query: computed(() => ({ locale: locale.value })),
-//   getCachedData: (key) => useNuxtData(key).data.value,
-//   default: () => [],
-// })
-
-// function communityWebsite(community: { website?: string; websiteUrl?: string }) {
-//   return (
-//     community.websiteUrl ??
-//     community.website ??
-//     (typeof community.website === 'string' && community.website.trim()
-//       ? community.website
-//       : null)
-//   )
-// }
-
-// const displayExternalCommunities = computed(() => {
-//   const ids = event.value?.externalCommunities ?? event.value?.external_communities ?? []
-//   const communityIds = Array.isArray(ids)
-//     ? ids.map((i) => (typeof i === 'string' ? i.trim() : null)).filter(Boolean)
-//     : []
-//   if (!communityIds.length || !allExternalCommunities.value) return []
-
-//   return allExternalCommunities.value.filter((c) =>
-//     communityIds.some((id) => String(c.id) === id),
-//   )
-// })
-
 const eventFormatKey = computed(() => {
   const raw = getEventFormatRaw(event.value)
   return raw ? normalizeEventFormatKey(raw) : null

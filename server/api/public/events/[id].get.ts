@@ -49,8 +49,9 @@ export default defineCachedEventHandler(async (event) => {
 
   const speakerIds = Array.isArray(data.speakers) ? data.speakers.filter((s: unknown) => typeof s === 'string') : []
   const sponsorIds = Array.isArray(data.sponsors) ? data.sponsors.filter((s: unknown) => typeof s === 'string') : []
+  const externalCommunityIds = Array.isArray(data.externalCommunities) ? data.externalCommunities.filter((s: unknown) => typeof s === 'string') : []
 
-  const [speakersResolved, sponsorsResolved] = await Promise.all([
+  const [speakersResolved, sponsorsResolved, externalCommunitiesResolved] = await Promise.all([
     Promise.all(speakerIds.map((sid: string) =>
       fetchThemeethub<any>(`/api/public/speakers/${sid}`, {
         ...(hubQuery ? { query: hubQuery } : {}),
@@ -65,6 +66,13 @@ export default defineCachedEventHandler(async (event) => {
         fallback: null,
       }),
     )).then((list) => list.filter(Boolean)),
+    Promise.all(externalCommunityIds.map((cid: string) =>
+      fetchThemeethub<any>(`/api/public/external-communities/${cid}`, {
+        ...(hubQuery ? { query: hubQuery } : {}),
+        cacheMaxAgeSec: 120,
+        fallback: null,
+      }),
+    )).then((list) => list.filter(Boolean)),
   ])
 
   return {
@@ -73,6 +81,11 @@ export default defineCachedEventHandler(async (event) => {
     sponsors: sponsorsResolved.map((s: { companyName?: string; name?: string }) => ({
       ...s,
       name: s.companyName ?? s.name,
+    })),
+    externalCommunities: externalCommunitiesResolved.map((c: { name?: string, websiteUrl?: string }) => ({
+      ...c,
+      name: c.name,
+      website: c.websiteUrl,
     })),
   }
 }, {
