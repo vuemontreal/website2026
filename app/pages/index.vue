@@ -59,7 +59,7 @@
             sizes="(min-width: 1024px) 50vw, 100vw"
             preload
             fetchpriority="high"
-            class="absolute inset-0 size-full object-cover"
+            class="absolute inset-0 size-full object-fill"
           />
           <div class="absolute inset-0 bg-linear-to-t from-black/20 to-transparent lg:bg-linear-to-l lg:from-transparent" />
         </div>
@@ -107,7 +107,7 @@
           width="800"
           height="534"
           sizes="(min-width: 1024px) 50vw, 100vw"
-          class="absolute inset-0 size-full object-cover"
+          class="absolute inset-0 size-full object-fill"
           loading="lazy"
         />
       </div>
