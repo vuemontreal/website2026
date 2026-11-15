@@ -1,3 +1,5 @@
+import { defineEventHandler, setHeader } from 'h3'
+
 type PublicEvent = {
   id?: string | number
   date?: string

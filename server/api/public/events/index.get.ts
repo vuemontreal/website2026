@@ -1,6 +1,7 @@
 /**
  * Proxy vers TheMeetHub GET /api/public/events — sans session, côté serveur uniquement.
  */
+import { defineEventHandler, getQuery } from 'h3'
 
 function normalizePublicEventsList(raw: unknown): unknown[] {
   if (Array.isArray(raw)) return raw
@@ -14,7 +15,7 @@ function normalizePublicEventsList(raw: unknown): unknown[] {
   return []
 }
 
-export default defineCachedEventHandler(async (event) => {
+export default defineEventHandler(async (event) => {
   const query = getQuery(event)
   const locale = typeof query.locale === 'string' ? query.locale : undefined
 
@@ -23,12 +24,4 @@ export default defineCachedEventHandler(async (event) => {
     cacheMaxAgeSec: 120,
   })
   return normalizePublicEventsList(raw)
-}, {
-  maxAge: 120,
-  swr: true,
-  getKey: (event) => {
-    const query = getQuery(event)
-    const locale = typeof query.locale === 'string' ? query.locale : 'default'
-    return `public-events:${locale}`
-  },
 })

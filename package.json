@@ -3,28 +3,36 @@
   "private": true,
   "type": "module",
   "engines": {
-    "node": ">=22.12.0"
+    "node": ">=26"
   },
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
-    "preview": "nuxt preview",
-    "postinstall": "patch-package"
+    "preview": "nuxt preview"
   },
   "dependencies": {
     "@nuxt/image": "^2.0.0",
     "@nuxt/ui": "^4",
     "@nuxtjs/i18n": "^9",
-    "@tailwindcss/typography": "^0.5.19",
+    "@tailwindcss/typography": "^0.5.4",
     "marked": "^17.0.5",
-    "nuxt": "^4.4.4",
+    "nuxt": "^4.6.4",
     "sanitize-html": "^2.17.2",
     "vue": "latest"
   },
   "devDependencies": {
+    "@iconify-json/heroicons": "^1.2.3",
     "@nuxt/devtools": "latest",
     "@types/node": "^25.5.0",
-    "patch-package": "^8.0.0"
+    "sass-embedded": "^1.108.2"
+  },
+  "allowScripts": {
+    "vue-demi@0.14.10": true,
+    "fsevents@2.3.3": true,
+    "sharp@0.34.5": true,
+    "esbuild@0.25.12": true,
+    "esbuild@0.27.7": true,
+    "@parcel/watcher@2.6.0": true
   }
 }

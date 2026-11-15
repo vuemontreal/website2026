@@ -3,6 +3,8 @@
  * Enrichit la réponse en remplaçant les IDs speakers/sponsors par les objets complets (routes publiques hub).
  */
 
+import { getQuery, getRouterParam } from "h3"
+import { defineCachedEventHandler } from 'nitropack/runtime'
 import { isUpstreamNotFound } from '../../../utils/themeethub'
 
 function normalizePublicEventDetail(raw: unknown): Record<string, unknown> | null {

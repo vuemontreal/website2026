@@ -2,9 +2,10 @@
  * Proxy vers TheMeetHub GET /api/public/speakers/:id — sans session, côté serveur uniquement.
  */
 
+import { defineEventHandler, getQuery, getRouterParam } from 'h3'
 import { isUpstreamNotFound } from '../../../utils/themeethub'
 
-export default defineCachedEventHandler(async (event) => {
+export default defineEventHandler(async (event) => {
   const id = getRouterParam(event, 'id')
   if (!id) throw createError({ statusCode: 400, message: 'ID manquant' })
 
@@ -28,13 +29,4 @@ export default defineCachedEventHandler(async (event) => {
   }
   if (!data) throw createError({ statusCode: 404, message: 'Intervenant non trouvé' })
   return data
-}, {
-  maxAge: 120,
-  swr: true,
-  getKey: (event) => {
-    const id = getRouterParam(event, 'id') || 'unknown'
-    const query = getQuery(event)
-    const locale = typeof query.locale === 'string' ? query.locale : 'default'
-    return `public-speaker:${id}:${locale}`
-  },
 })

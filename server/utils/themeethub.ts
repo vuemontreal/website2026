@@ -3,12 +3,10 @@
  * Toutes les requêtes partent du serveur Nuxt — pas de CORS.
  */
 
+import { useRuntimeConfig, useStorage } from 'nitropack/runtime'
+
 function resolveRuntimeConfig() {
-  try {
-    return useRuntimeConfig(useEvent())
-  } catch {
-    return useRuntimeConfig()
-  }
+  return useRuntimeConfig()
 }
 
 function getThemeethubBaseUrl(): string {

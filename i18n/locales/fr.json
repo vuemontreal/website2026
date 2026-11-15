@@ -128,7 +128,9 @@
     "replays": "Replays",
     "replaysYoutubeChannel": "Les replays sont disponibles sur notre chaîne YouTube →",
     "replayVideoTitleFallback": "Replay",
-    "externalCommunities": "Communautés partenaires"
+    "externalCommunities": "Communautés partenaires",
+    "photos": "Photos de l'événement",
+    "slides": "Présentation à télécharger"
   },
   "sponsors": {
     "title": "Nos partenaires",

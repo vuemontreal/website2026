@@ -1,8 +1,5 @@
 export default defineNuxtConfig({
-  srcDir: 'app',
-  future: {
-    compatibilityVersion: 5,
-  },
+  compatibilityDate: "2026-11-15",
   modules: ['@nuxt/ui', '@nuxtjs/i18n', '@nuxt/image'],
   css: ['~/assets/css/main.css'],
   devtools: { enabled: process.env.NODE_ENV !== 'production' },
@@ -83,15 +80,14 @@ export default defineNuxtConfig({
       enableDarkMode: process.env.VITE_ENABLE_DARK_MODE,
     },
   },
-  i18n: {
+i18n: {
     locales: [
-      { code: 'fr', name: 'Français', file: 'fr.json', isDefault: true },
-      { code: 'en', name: 'English', file: 'en.json' },
+      { code: 'fr', name: 'Français', isDefault: true },
+      { code: 'en', name: 'English' },
     ],
     defaultLocale: 'fr',
-    lazy: true,
-    langDir: 'locales',
     bundle: { optimizeTranslationDirective: false },
+    vueI18n: './i18n.config.ts',
   },
   nitro: {
     storage: {
@@ -99,5 +95,15 @@ export default defineNuxtConfig({
         driver: 'memory'
       }
     }
-  }
+  },
+  vite: {
+    server: {
+      fs: {
+        allow: ['.'],
+      },
+    },
+    optimizeDeps: {
+      include: ['marked', 'sanitize-html'],
+    },
+  },
 })

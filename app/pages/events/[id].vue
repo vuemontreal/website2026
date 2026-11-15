@@ -85,6 +85,24 @@
             </p>
           </section>
 
+          <!-- Slides -->
+
+          <section v-if="showSlidesSection" class="mb-12">
+             <h2 class="mb-6 text-xl font-semibold">
+                {{ $t('event.slides') }}
+              </h2>
+              <template v-for="talk in event.talks">
+                <NuxtLink
+                  :to="talk.slides.fileUrl"
+                  external
+                  target="_blank"
+                  class="inline-flex min-h-11 flex-2 items-center justify-center gap-2 rounded-xl bg-primary px-5 py-3.5 text-center text-sm font-semibold text-inverted shadow-lg transition hover:opacity-90 sm:min-h-0 sm:px-6 sm:text-base"
+                >
+                  {{ talk.title ? talk.title : "download" }}
+                </NuxtLink>
+              </template>
+          </section>
+
           <!-- Replays (événements passés uniquement) -->
           <section v-if="showReplaysSection" class="mb-12">
             <template v-if="replayEmbedItems.length">
@@ -120,6 +138,15 @@
                 {{ $t('event.replaysYoutubeChannel') }}
               </a>
             </p>
+          </section>
+
+          <!-- Photos -->
+
+          <section v-if="showPhotosSection" class="mb-12">
+             <h2 class="mb-6 text-xl font-semibold">
+                {{ $t('event.photos') }}
+              </h2>
+            <Carousel :items="event.photos" />
           </section>
 
           <!-- Speakers -->
@@ -459,6 +486,10 @@ const replayEmbedItems = computed(() => {
 })
 
 const showReplaysSection = computed(() => isPastEvent.value)
+
+const showPhotosSection = computed(() => event.value.photos.length > 0)
+
+const showSlidesSection = computed(() => event.value.talks.length > 0)
 
 const eventFormatLabel = computed(() => {
   const raw = getEventFormatRaw(event.value)

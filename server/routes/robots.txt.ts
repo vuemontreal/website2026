@@ -1,3 +1,5 @@
+import { defineEventHandler, setHeader } from 'h3'
+
 export default defineEventHandler((event) => {
   const config = useRuntimeConfig(event)
   const siteUrl = (config.public.siteUrl || 'https://vuemontreal.ca').replace(/\/+$/, '')

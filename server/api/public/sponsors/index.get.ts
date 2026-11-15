@@ -1,8 +1,9 @@
 /**
  * Proxy vers TheMeetHub GET /api/public/sponsors — sans session, côté serveur uniquement.
  */
+import { defineEventHandler, getQuery } from 'h3'
 
-export default defineCachedEventHandler(async (event) => {
+export default defineEventHandler(async (event) => {
   const query = getQuery(event)
   const locale = typeof query.locale === 'string' ? query.locale : undefined
 
@@ -10,12 +11,4 @@ export default defineCachedEventHandler(async (event) => {
     ...(locale ? { query: { locale } } : {}),
     cacheMaxAgeSec: 120,
   })
-}, {
-  maxAge: 120,
-  swr: true,
-  getKey: (event) => {
-    const query = getQuery(event)
-    const locale = typeof query.locale === 'string' ? query.locale : 'default'
-    return `public-sponsors:${locale}`
-  },
 })
