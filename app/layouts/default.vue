@@ -124,9 +124,9 @@
             </h4>
             <ul class="mt-4 space-y-2">
               <li>
-                <a :href="`mailto:${siteConfig.contactEmail}`" class="text-sm text-gray-600 hover:text-primary dark:text-gray-400">
-                  {{ siteConfig.contactEmail }}
-                </a>
+                <NuxtLink :to="localePath('/contact')" class="text-sm text-gray-600 hover:text-primary dark:text-gray-400">
+                  {{ $t('contact.questions') }}
+                </NuxtLink>
               </li>
               <li>
                 <NuxtLink :to="localePath('/contact#sponsoring')" class="text-sm text-gray-600 hover:text-primary dark:text-gray-400">

@@ -60,6 +60,12 @@ export default defineNuxtConfig({
      * et le défaut localhost est figé en prod si .env n’est pas lu.
      */
     themeethubApiUrl: 'http://localhost:3000',
+    /**
+     * Configuration Resend (serveur uniquement — jamais exposé au client)
+     */
+    resendApiKey: process.env.RESEND_API_KEY || '',
+    contactToEmail: process.env.CONTACT_TO_EMAIL || '',
+    contactFromEmail: process.env.CONTACT_FROM_EMAIL || 'Vue Montreal <onboarding@resend.dev>',
     public: {
       siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://vuemontreal.ca',
       contactEmail: process.env.NUXT_CONTACT_EMAIL || 'contact@vuemontreal.org',
