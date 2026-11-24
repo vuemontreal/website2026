@@ -107,7 +107,7 @@
           width="800"
           height="534"
           sizes="(min-width: 1024px) 50vw, 100vw"
-          class="absolute inset-0 size-full object-fill"
+          class="absolute inset-0 size-full md:object-cover object-fill"
           loading="lazy"
         />
       </div>
