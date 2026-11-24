@@ -46,7 +46,7 @@
     "name": "Full name",
     "namePlaceholder": "Your full name",
     "email": "Email address",
-    "emailPlaceholder": "you@example.com",
+    "emailPlaceholder": "you{'@'}example.com",
     "company": "Company / Organization",
     "companyPlaceholder": "Your company or organization name",
     "capacity": "Estimated venue capacity",

@@ -46,7 +46,7 @@
     "name": "Nom complet",
     "namePlaceholder": "Votre prénom et nom",
     "email": "Adresse courriel",
-    "emailPlaceholder": "vous@exemple.com",
+    "emailPlaceholder": "vous{'@'}exemple.com",
     "company": "Entreprise / Organisation",
     "companyPlaceholder": "Nom de votre entreprise ou organisation",
     "capacity": "Capacité d'accueil estimée",
